@@ -1,1 +1,1 @@
-# CSE412-FlightBookingSimulator
+# CSE412-Airline-Tickets
