@@ -1,0 +1,22 @@
+{
+  "name": "cse412-airline-tickets",
+  "version": "1.0.0",
+  "description": "Final project for CSE 412",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samsaid/CSE412-Airline-Tickets.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samsaid/CSE412-Airline-Tickets/issues"
+  },
+  "homepage": "https://github.com/samsaid/CSE412-Airline-Tickets#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
