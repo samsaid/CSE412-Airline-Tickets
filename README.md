@@ -5,11 +5,19 @@ Final project for CSE 412
 - VS Code
 - Terminal
 - Command line
+- Heroku Postgres Database
+
+## How to start database
+Assuming you have access to the database and have initially logged into your Heroku account:
+```
+    cd CSE412-Airline-Tickets
+    heroku pg : psql
+```
 
 ## How to start application
 1. Locate to project folder and start back end server
     ```
-    cd /CSE412-Airline-Tickets/
+    cd /CSE412-Airline-Tickets
     npm start
     ```
 2. Locate to client folder (this is the front end) and start the server
