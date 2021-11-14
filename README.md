@@ -13,6 +13,7 @@ Assuming you have access to the database and have initially logged into your Her
     cd CSE412-Airline-Tickets
     heroku pg : psql
 ```
+This command will start the database server. Here you can begin to perform SQL queries such as adding tables, deleting rows, etc.
 
 ## How to start application
 1. Locate to project folder and start back end server
