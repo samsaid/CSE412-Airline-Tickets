@@ -32,8 +32,19 @@ This command will start the database server. Here you can begin to perform SQL q
 Done! Now you can begin development. :) To begin developing on the front end, locate to client/src/App.js
 
 #### How to push changes made on the application
+The following commands should happen in the order this order.
+
 ``` 
-    git add .                      //this command will add all files changes ready to "stage". if you want to only update one file on the branch, use git add <file name>
-    git commit -m "enter message here" // commit changes with a message.. a commit is like "saving" the current version of the file/files changed that are ready to be pushed
-    git push        //this command 
+git add .
 ```
+Adds all files changes to save. Alternative: "git add <file name>" for a specific file only.
+
+```
+git commit -m "enter message here"
+```
+Think of a commit like an equivalent of "saving" the file at its current state.
+
+```
+git push                        
+```
+Push your changes (that were saved with the previous commands) from your local development work area to the main branch.
