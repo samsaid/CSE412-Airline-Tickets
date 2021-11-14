@@ -29,22 +29,20 @@ This command will start the database server. Here you can begin to perform SQL q
     ```
 3. In a few seconds, a web page should open on your default browser at "http://localhost:3000"
 
-Done! Now you can begin development. :) To begin developing on the front end, locate to client/src/App.js
+Done! Now you can begin development. :) To begin developing on the front end, open VS Code and locate to client/src/App.js
 
 #### How to push changes made on the application
-The following commands should happen in the order this order.
+Once you have made changes, use these commands in the project folder /CSE412-Airline-Tickets/ on the command line.
 
-``` 
-git add .
-```
-Adds all files changes to save. Alternative: "git add <file name>" for a specific file only.
-
-```
-git commit -m "enter message here"
-```
-Think of a commit like an equivalent of "saving" the file at its current state.
-
-```
-git push                        
-```
-Push your changes (that were saved with the previous commands) from your local development work area to the main branch.
+- Add all files that were changed to staging area. Alternative: "git add < filename >" for a specific file only:
+    ``` 
+    git add .
+    ```
+- Save files in staging area with a brief message/summary of changes made:
+    ```
+    git commit -m "enter message here"
+    ```
+- Push your changes to the main branch:
+    ```
+    git push                        
+    ```
