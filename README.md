@@ -32,7 +32,7 @@ This command will start the database server. Here you can begin to perform SQL q
 Done! Now you can begin development. :) To begin developing on the front end, open VS Code and locate to client/src/App.js
 
 #### How to push changes made on the application
-Once you have made changes, use these commands in the project folder /CSE412-Airline-Tickets/ on the command line.
+Once you have made changes, use these commands in the project folder /CSE412-Airline-Tickets/. These commands must be done in order to complete the entire process of saving the changes from your local environment to the desired branch.
 
 - Add all files that were changed to staging area. Alternative: "git add < filename >" for a specific file only:
     ``` 
