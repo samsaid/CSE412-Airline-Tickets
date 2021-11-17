@@ -5,7 +5,9 @@ Final project for CSE 412
 - VS Code
 - Terminal
 - Command line
-- Heroku Postgres Database
+- Heroku PostgresSQL Database
+- React
+- Node.js
 
 ## How to start database
 Assuming you have access to the database and have initially logged into your Heroku account:

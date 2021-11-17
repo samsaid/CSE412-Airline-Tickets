@@ -4,7 +4,11 @@
   "description": "Final project for CSE 412",
   "main": "index.js",
   "scripts": {
-    "start": "node server/index.js"
+    "start": "node server/index.js",
+    "build": "cd client && npm install && npm run build"
+  },
+  "engines":{
+    "node": "14.18.0"
   },
   "repository": {
     "type": "git",
