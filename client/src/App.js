@@ -16,40 +16,66 @@ function App() {
   return (
 
     <div className="App">
-      
-      <h1 style={{ fontFamily: "Verdana", color: 'black', textAlign: 'left', fontSize: 36 }}>Flight Booking Simulator</h1>
-      <div class="parallax"></div>
-      <div style={{ height: 50, fontSize: 36 }}>sddsd</div>
-     
-      <img
-        src="https://www.pngkey.com/png/full/14-144708_vector-transparent-download-airplane-vacation-clipart-globe-with.png" align="left" width=" 234 " height="199.8 "
 
-      />
-      <select >
-        <option selected value="coconut">
-          Trip Type
-        </option>
-        <option value="option 1"> Option 1 </option>
-        <option value="option 2"> Option 2 </option>
+      <div class="cap">
+        {/*
+      <div style={{ fontFamily: "Circular,Arial,sans-serif", fontWeight:700, color: 'black', textAlign: 'left', fontSize: 50 }}>Flight Booking Simulator</div>
+      */
+        }
 
-      </select>
+      </div>
 
-      <form style={{ padding: 20, justifyContent: 'space-between' }}>
+      <div class="parallax" style={{ fontFamily: "Circular,Arial,sans-serif", fontWeight: 700, color: 'black', textAlign: 'left', fontSize: 55 }}> Flight Booking Simulator</div>
 
-        <label>Departing From:
-          <input type="text" />
-        </label>
-      </form>
+      <div style={{ height: 300, fontSize: 20, backgroundColor: '#fafbfc' }}>
 
-      <form>
+        {/*
+          <img
+            src="https://www.pngkey.com/png/full/14-144708_vector-transparent-download-airplane-vacation-clipart-globe-with.png" align="left" width=" 234 " height="199.8 "
 
-        <label style={{ padding: 20 }}>Departing From:
-          <input type="text" />
-        </label>
-      </form>
+          />
+          */
+        }
+        <div class="container">
+
+          <div id="col" >
+            <select >
+              <option class="textinput" placeholder="Comment">Trip Type</option>
+
+              <option value="option 1"> Option 1 </option>
+              <option value="option 2"> Option 2 </option>
+
+            </select>
+          </div>
+
+          <div id="textbox1">
+            <form >
 
 
+              <label>Departing From:
+                <input type="text" />
+              </label>
+            </form>
+          </div>
 
+
+          <div id="textbox2">
+            <form>
+
+              <label >Departing From:
+                <input type="text" />
+              </label>
+            </form>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="bg2">
+
+
+      </div>
 
     </div>
   );

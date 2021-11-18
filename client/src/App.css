@@ -29,14 +29,25 @@
   color: #61dafb;
 }
 
-
-
-.parallax {
-  /* The image used */
+.parallax{
   background-image: url(https://img1.goodfon.com/wallpaper/nbig/d/87/boeing-samolet-nebo.jpg);
 
   /* Set a specific height */
-  min-height: 500px; 
+  min-height: 85vh; 
+}
+
+.bg2{
+  background-image: url(https://www.coforge.com/sites/default/files/2021-01/banner_11.jpg);
+
+  /* Set a specific height */
+  min-height: 40vh; 
+}
+
+.parallax, .bg2 {
+  /* The image used */
+  
+  
+
 
   /* Create the parallax scrolling effect */
   background-attachment: fixed;
@@ -44,6 +55,19 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+#textbox1, #textbox2, #col {
+  position: relative;
+  right: -50vh;
+  display: block;
+  float: left;    
+
+   
+}
+.cap{
+  color:#000;
+}
+
 
 @keyframes App-logo-spin {
   from {
