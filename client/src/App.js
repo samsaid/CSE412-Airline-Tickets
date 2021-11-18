@@ -16,8 +16,11 @@ function App() {
   return (
 
     <div className="App">
-
+      
       <h1 style={{ fontFamily: "Verdana", color: 'black', textAlign: 'left', fontSize: 36 }}>Flight Booking Simulator</h1>
+      <div class="parallax"></div>
+      <div style={{ height: 50, fontSize: 36 }}>sddsd</div>
+     
       <img
         src="https://www.pngkey.com/png/full/14-144708_vector-transparent-download-airplane-vacation-clipart-globe-with.png" align="left" width=" 234 " height="199.8 "
 
@@ -44,6 +47,8 @@ function App() {
           <input type="text" />
         </label>
       </form>
+
+
 
 
     </div>
