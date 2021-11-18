@@ -19,15 +19,19 @@ Airline Tickets is supported on Linux, macOS, and Windows.
 - React
 - Node.js
 - Heroku PostgresSQL Database
-- Languages: JavaScript, HTML, SQL
+- SQL
+- JavaScript
+- HTML/CSS
 ### Database Schema
 #### ER Diagram
 The database for this project is a relational database model contining 5 tables.  
+
 The following image contains a screenshot of the ER (Entity-Relationship) Diagram created for this project.
 ![System Overview](/images/er-diagram.png)
 
 #### ER-to-Relational
 To create the database system in PostgresSQL, the ER Digram was transformed relational database model using the following SQL data definition language (DDL).  
+
 Flight table
 ```
 CREATE TABLE Flight (
