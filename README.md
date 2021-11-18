@@ -1,6 +1,8 @@
 # CSE412-Airline-Tickets
 ## Table of Contents  
 - [1. About the Project](#about-the-project)
+    - [1.1. ER Diagram](#er-diagram)
+    - [1.2. System Architechture](#system-architechture)
 - [2. Tools](#tools)
 - [3. Getting Started](#getting-started)
     - [3.1. Development Environment](#development-environment)  
@@ -8,10 +10,10 @@
         - [3.1.2. Push Changes to Heroku Application](#push-changes-to-heroku-application)  
             
 ## About the Project
-Airline Tickets is supported on Linux, macOS, and Windows.
+Airline Tickets is supported on Linux, macOS, and Windows. This application
 
 ### ER Diagram
-Database Entity-Relationshp Diagram
+Database Entity-Relationship Diagram
 ![System Overview](/images/er-diagram.png)
 
 ### System Architechture
@@ -20,9 +22,10 @@ System Overview of Application
 
 ## Tools
 - Visual Studio Code
-- Heroku PostgresSQL Database
 - React
 - Node.js
+- Heroku PostgresSQL Database
+- Languages: JavaScript, HTML, SQL
 
 ## Getting Started  
 ### Development Enviornment
