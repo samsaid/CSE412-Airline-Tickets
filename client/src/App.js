@@ -2,6 +2,7 @@ import React from 'react'
 import logo from './logo.svg';
 import './App.css';
 
+
 function App() {
   const [data, setData] = React.useState(null);
   //HTTP request from react to Node..if data is not read yet then Loading will display
@@ -13,14 +14,41 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          {!data ? "Loading..." : data}
-          </p>
-      </header>
+      <h1>
+        Flight Booking Simulator</h1>
+      <select>
+        <option selected value="coconut">
+          Trip Type
+        </option>
+        <option value="option 1"> Option 1 </option>
+        <option value="option 2"> Option 2 </option>
+
+      </select>
+
+      <select>
+        <option selected value="coconut">
+          Departing From
+        </option>
+        <option value="option 1"> Option 1 </option>
+        <option value="option 2"> Option 2 </option>
+
+      </select>
+
+      <select>
+        <option selected value="coconut">
+          Departing From
+        </option>
+        <option value="option 1"> Option 1 </option>
+        <option value="option 2"> Option 2 </option>
+
+      </select>
+
+
     </div>
   );
 }
+
+
+
 
 export default App;
