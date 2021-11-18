@@ -4,6 +4,7 @@ import './App.css';
 
 
 function App() {
+
   const [data, setData] = React.useState(null);
   //HTTP request from react to Node..if data is not read yet then Loading will display
   React.useEffect(() => {
@@ -13,10 +14,15 @@ function App() {
   }, []);
 
   return (
+
     <div className="App">
-      <h1>
-        Flight Booking Simulator</h1>
-      <select>
+
+      <h1 style={{ fontFamily: "Verdana", color: 'black', textAlign: 'left', fontSize: 36 }}>Flight Booking Simulator</h1>
+      <img
+        src="https://www.pngkey.com/png/full/14-144708_vector-transparent-download-airplane-vacation-clipart-globe-with.png" align="left" width=" 234 " height="199.8 "
+
+      />
+      <select >
         <option selected value="coconut">
           Trip Type
         </option>
@@ -25,23 +31,19 @@ function App() {
 
       </select>
 
-      <select>
-        <option selected value="coconut">
-          Departing From
-        </option>
-        <option value="option 1"> Option 1 </option>
-        <option value="option 2"> Option 2 </option>
+      <form style={{ padding: 20, justifyContent: 'space-between' }}>
 
-      </select>
+        <label>Departing From:
+          <input type="text" />
+        </label>
+      </form>
 
-      <select>
-        <option selected value="coconut">
-          Departing From
-        </option>
-        <option value="option 1"> Option 1 </option>
-        <option value="option 2"> Option 2 </option>
+      <form>
 
-      </select>
+        <label style={{ padding: 20 }}>Departing From:
+          <input type="text" />
+        </label>
+      </form>
 
 
     </div>
