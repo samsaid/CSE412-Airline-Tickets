@@ -1,15 +1,23 @@
 # CSE412-Airline-Tickets
-Final project for CSE 412
+## Table of Contents
+1. [1. About the Project](#about-the-project)
+    2. [1.2 Tools](#tools)
+    2. [1.3 Getting Started](#getting-started)
+        3. [1.3.1](#database-setup)
+        3. [1.3.2](#application-setup)
+            4. [1.3.2.1](#pushing-changes)  
+            
+# About the Project
+Airline Tickets is supported on Linux, macOS, and Windows.  
 
-## Tools:
+## Tools
 - VS Code
-- Terminal
-- Command line
 - Heroku PostgresSQL Database
 - React
 - Node.js
 
-## How to start database
+## Getting started  
+### Database setup
 Assuming you have access to the database and have initially logged into your Heroku account:
 ```
     cd CSE412-Airline-Tickets
@@ -18,7 +26,7 @@ Assuming you have access to the database and have initially logged into your Her
 This command will start the database server. Here you can begin to perform SQL queries such as adding tables, deleting rows, etc.
 ** Note: This database will update automatically upon any edits made. No need to manually push changes to Heroku.
 
-## How to start application
+## Application setup
 1. In a command line window, locate to project folder and start back end server.
     ```
     cd /CSE412-Airline-Tickets
@@ -33,8 +41,8 @@ This command will start the database server. Here you can begin to perform SQL q
 
 Done! Now you can begin development. :) To begin developing on the front end, open VS Code and locate to client/src/App.js
 
-#### How to push changes made on the application
-Once you have made changes, use these commands in the project folder /CSE412-Airline-Tickets/. These commands must be done in order to complete the entire process of saving the changes from your local environment to the desired branch.
+### Pushing changes
+Once you have made changes, use these commands in the project folder /CSE412-Airline-Tickets/. These commands must be done in order to complete the entire process of saving the changes from your local environment to the main branch.
 
 - Add all files that were changed to staging area. Alternative: "git add < filename >" for a specific file only:
     ``` 
