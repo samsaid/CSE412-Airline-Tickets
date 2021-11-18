@@ -2,7 +2,9 @@
 ## Table of Contents  
 - [1. About the Project](#about-the-project)
     - [1.1. Tools](#tools)
-    - [1.2. ER Diagram](#er-diagram)
+    - [1.2. Database Schema](#database-schema)
+        - [1.2.1. ER Diagram](#er-diagram)
+        - [1.2.2. ER-to-Relational](#er-to-relational)
     - [1.3. System Architechture](#system-architechture)
 - [2. Getting Started](#getting-started)
     - [2.1. Development Environment](#development-environment)  
@@ -18,10 +20,63 @@ Airline Tickets is supported on Linux, macOS, and Windows.
 - Node.js
 - Heroku PostgresSQL Database
 - Languages: JavaScript, HTML, SQL
-
-### ER Diagram
-Database Entity-Relationship Diagram
+### Database Schema
+#### ER Diagram
+The database for this project is a relational database model contining 5 tables.  
+The following image contains a screenshot of the ER (Entity-Relationship) Diagram created for this project.
 ![System Overview](/images/er-diagram.png)
+
+#### ER-to-Relational
+To create the database system in PostgresSQL, the ER Digram was transformed relational database model using the following SQL data definition language (DDL).  
+Flight table
+```
+CREATE TABLE Flight (
+    flight_number INT,
+    airline CHAR(30),
+    origin_airport CHAR(3),
+    origin_city CHAR(30),
+    origin_state CHAR(2),
+    origin_country CHAR(2),
+    destination_airport CHAR(3),
+    destination_city CHAR(30),
+    destination_state CHAR(2),
+    destination_country CHAR(2),
+    dep_date DATE,
+    arr_date DATE,
+    dep_time TIME(0),
+    arr_time TIME(0),
+    flight_capacity,
+    PRIMARY KEY (customer_id));
+```
+Customer table
+```
+CREATE TABLE Customers(
+    customer_id INT,
+    first_name CHAR(30),
+    last_name CHAR(30),
+    dob DATE,
+    PRIMARY KEY (customer_id));
+```
+Tickets table
+```
+CREATE TABLE Tickets(
+    ticket_id INT,
+    flight_number INT,
+    price_usd DECIMAL(6,2),
+    PRIMARY KEY (flight_number, ticket_id),
+    FOREIGN KEY (flight_number) REFERENCES Flight(flight_number) );
+```
+Schedule table
+```
+CREATE TABLE Schedule(
+    schedule_id INT,
+    ticket_id INT,
+    flight_number INT,
+    cust_id INT,
+    PRIMARY KEY (schedule_id, ticket_id, cust_id),
+    FOREIGN KEY (flight_number, ticket_id) REFERENCES Tickets(flight_number, ticket_id),
+    FOREIGN KEY (cust_id) REFERENCES Customers(customer_id));
+```
 
 ### System Architechture
 System Overview of Application
