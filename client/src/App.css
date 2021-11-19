@@ -33,14 +33,17 @@
   background-image: url(https://img1.goodfon.com/wallpaper/nbig/d/87/boeing-samolet-nebo.jpg);
 
   /* Set a specific height */
-  min-height: 85vh; 
+  min-height: 75vh; 
+ /* text-shadow: 2px 2px 10px #000*/
 }
 
+
 .bg2{
-  background-image: url(https://www.coforge.com/sites/default/files/2021-01/banner_11.jpg);
+  background-image: url(https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80);
 
   /* Set a specific height */
-  min-height: 40vh; 
+  min-height: 50vh; 
+
 }
 
 .parallax, .bg2 {
@@ -54,15 +57,32 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+
 }
 
-#textbox1, #textbox2, #col {
+#textbox1, #textbox2, #textbox3, #col {
   position: relative;
-  right: -50vh;
+  right: -10vw;
   display: block;
-  float: left;    
+  float: left;   
+ 
 
    
+}
+
+.button{
+  position: relative;
+
+  display: block;
+  float: right; 
+
+  background-color: gray;
+  color: white;
+  font-size: 20px;
+  padding: 10px 60px;
+  border-radius: 5px;
+  margin: 10px 0px;
+  cursor: pointer;   
 }
 .cap{
   color:#000;

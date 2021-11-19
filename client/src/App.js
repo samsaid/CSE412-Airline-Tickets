@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 
+
 function App() {
 
   const [data, setData] = React.useState(null);
@@ -12,6 +13,11 @@ function App() {
       .then((res) => res.json())
       .then((data) => setData(data.message));
   }, []);
+
+  function sayHello() {
+    alert('You clicked me!');
+  }
+
 
   return (
 
@@ -25,9 +31,11 @@ function App() {
 
       </div>
 
-      <div class="parallax" style={{ fontFamily: "Circular,Arial,sans-serif", fontWeight: 700, color: 'black', textAlign: 'left', fontSize: 55 }}> Flight Booking Simulator</div>
 
-      <div style={{ height: 300, fontSize: 20, backgroundColor: '#fafbfc' }}>
+      <div class="parallax" style={{ fontFamily: "Lucida Sans ", color: 'white', textAlign: 'left', fontSize: 45, fontWeight: 700, padding: 15 }}> Flight Booking Simulator</div>
+
+      <div style={{ height: 400, fontSize: 20, backgroundColor: 'white' }}>
+
 
         {/*
           <img
@@ -38,7 +46,28 @@ function App() {
         }
         <div class="container">
 
+
           <div id="col" >
+
+
+            <button class="button" onClick={sayHello}>Button</button>
+
+            <select >
+              <option class="textinput" placeholder="Comment">Trip Type</option>
+
+              <option value="option 1"> Option 1 </option>
+              <option value="option 2"> Option 2 </option>
+
+            </select>
+
+            <select >
+              <option class="textinput" placeholder="Comment">Trip Type</option>
+
+              <option value="option 1"> Option 1 </option>
+              <option value="option 2"> Option 2 </option>
+
+            </select>
+
             <select >
               <option class="textinput" placeholder="Comment">Trip Type</option>
 
@@ -48,12 +77,16 @@ function App() {
             </select>
           </div>
 
+
+
+
+
           <div id="textbox1">
             <form >
 
 
-              <label>Departing From:
-                <input type="text" />
+              <label style={{ fontFamily: "Circular,Arial,sans-serif,", fontWeight: 700 }}> Travel Dates:
+                <input type="text" style={{ padding: 12 }} />
               </label>
             </form>
           </div>
@@ -62,8 +95,17 @@ function App() {
           <div id="textbox2">
             <form>
 
-              <label >Departing From:
-                <input type="text" />
+              <label style={{ fontFamily: "Circular,Arial,sans-serif,", fontWeight: 700 }}>Departing From:
+                <input type="text" style={{ padding: 12 }} />
+              </label>
+            </form>
+          </div>
+
+          <div id="textbox3">
+            <form>
+
+              <label style={{ fontFamily: "Circular,Arial,sans-serif,", fontWeight: 700 }}>Departing From:
+                <input type="text" style={{ padding: 12 }} />
               </label>
             </form>
           </div>
