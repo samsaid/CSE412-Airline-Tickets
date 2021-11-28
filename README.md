@@ -7,17 +7,18 @@
         - [1.2.2. ER-to-Relational](#er-to-relational)
     - [1.3. System Architechture](#system-architechture)
 - [2. Getting Started](#getting-started)
-    - [2.1. Development Environment](#development-environment)  
-        - [2.1.1. Push Changes to Github](#push-changes-to-github)
-        - [2.1.2. Push Changes to Heroku Application](#push-changes-to-heroku-application)  
+    - [2.1 Demo](#demo)
+    - [2.2. Development Environment](#development-environment)  
+        - [2.2.1. Push Changes to Github](#push-changes-to-github)
+        - [2.2.2. Push Changes to Heroku Application](#push-changes-to-heroku-application)  
             
 ## About the Project
 This repository contains an application "Airline Tickets" which is a React/Node web application connected to a PostgresSQL database deployed via Heroku. The objective of this project is to demonstrate an understanding of a relational database management system. 
 
-The project was completed in three main phases:      
+The project was completed in three phases:      
 
 - Phase I included selecting a topic, researching development tools, and creating the project plan. By the end of this phase, we designed the database system using an ER diagram to visualize how the database components interact.     
-- Phase II included creating the database on a PostgresSQL database server and collecting data for the database. During this phase, we've modified our original database design as we made progress on database implementation and considered the interaction of the entities. By the end of Phase II, we used SQL to convert the ER Diagram to a relational database with tables and relationships and filled the database with our data collected.  
+- Phase II included data collection, and creating the database on a PostgresSQL database server. During this phase, we've modified our original database design as we made progress on database implementation and considered the relationships of entities. By the end of Phase II, we used SQL to convert the ER Diagram to a relational database with tables and relationships and inserted the data with SQL into the database.  
 - Phase III included setting up our team development environment and creating the application which can make queries to the database. 
 
 ### Tools
@@ -104,7 +105,12 @@ System Overview of Application
 ![System Overview](/images/system-overview.png)
 
 ## Getting Started  
+### Demo
+To access the live deployment of the application, click [here](https://cse-412.herokuapp.com/).  
+
 ### Development Enviornment
+The following steps are only necessary for the project developers or users who are looking to implement a version of the project. To view/acces the live version of the appplication, see section on [demo][demo].
+
 **1.** Clone the project repository 
 ```
 git clone https://github.com/samsaid/CSE412-Airline-Tickets.git
