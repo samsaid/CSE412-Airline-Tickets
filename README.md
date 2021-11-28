@@ -113,6 +113,9 @@ System Overview of Application
 ### Using the Application
 To access the live deployment of the application, click [here](https://cse-412.herokuapp.com/).  
 
+Below are screenshots of application demonstration.  
+Example - searching a flight and the displayed data results:
+
 ### Development Enviornment
 The following steps are only necessary for the project developers or users who are looking to implement a version of the project. To view/acces the live version of the appplication, see section on [using the application](#using-the-application).
 
@@ -164,4 +167,4 @@ git checkout masterbranch
 git push heroku main
 heroku open
 ```  
-Web page changes should now be displayed.
+Web page changes on "https://cse-412.herokuapp.com/" should now be displayed.
