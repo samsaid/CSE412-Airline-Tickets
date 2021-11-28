@@ -12,13 +12,13 @@
         - [2.1.2. Push Changes to Heroku Application](#push-changes-to-heroku-application)  
             
 ## About the Project
-This repository contains an application "Airline Tickets" which is a React/Node web application connected to the PostgresSQL database managed and deployed via Heroku. The objective of this project is to demonstrate an understanding of a relational database management system. The timeline of this project was completed in three main phases:    
+This repository contains an application "Airline Tickets" which is a React/Node web application connected to a PostgresSQL database deployed via Heroku. The objective of this project is to demonstrate an understanding of a relational database management system. The project was completed in three main phases:      
 
-Phase I included researching a topic, development tools, and creating a plan for the rest of the duration of the project. In this portion, we designed the relational database system using an ER diagram to visualize how the database components interact.   
+Phase I included selecting a topic, researching development tools, and creating the project plan. By the end of Phase I, we designed the database system using an ER diagram to visualize how the database components interact.     
 
-Phase II included creating the database on a selected PostgresSQL database server, and collecting data for the database. In this portion, we've modified our original database design, as we moved furthur along on implementation of the databse. By the end of Phase II, we used SQL to convert the ER Diagram to relational database with tables and relationships.  
+Phase II included creating the database on a PostgresSQL database server and collecting data for the database. During this phase, we've modified our original database design as we made progress on database implementation and considered the interaction of the entities. By the end of Phase II, we used SQL to convert the ER Diagram to a relational database with tables and relationships and filled the database with our data collected.  
 
-Phase III included setting up team development environment and creating the application which can make queries to the database. The application was created in iterations amongst the team members.
+Phase III included setting up our team development environment and creating the application which can make queries to the database. 
 
 ### Tools
 - Visual Studio Code
