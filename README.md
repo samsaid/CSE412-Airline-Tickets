@@ -7,7 +7,7 @@
         - [1.2.2. ER-to-Relational](#er-to-relational)
     - [1.3. System Architechture](#system-architechture)
 - [2. Getting Started](#getting-started)
-    - [2.1 Demo](#demo)
+    - [2.1 Using the Application](#using-the-application)
     - [2.2. Development Environment](#development-environment)  
         - [2.2.1. Push Changes to Github](#push-changes-to-github)
         - [2.2.2. Push Changes to Heroku Application](#push-changes-to-heroku-application)  
@@ -105,11 +105,11 @@ System Overview of Application
 ![System Overview](/images/system-overview.png)
 
 ## Getting Started  
-### Demo
+### Using the Application
 To access the live deployment of the application, click [here](https://cse-412.herokuapp.com/).  
 
 ### Development Enviornment
-The following steps are only necessary for the project developers or users who are looking to implement a version of the project. To view/acces the live version of the appplication, see section on [demo][demo].
+The following steps are only necessary for the project developers or users who are looking to implement a version of the project. To view/acces the live version of the appplication, see section on [using the application](#using-the-application).
 
 **1.** Clone the project repository 
 ```
