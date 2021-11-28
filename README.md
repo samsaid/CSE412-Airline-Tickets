@@ -22,6 +22,7 @@ The project was completed in three phases:
 - Phase III included setting up our team development environment and creating the application which can make queries to the database. 
 
 Screenshot of application welcome page:  
+![Screenshot of application welcome page](/images/app-screenshot1.png)
   
 
 For a more in depth look at the application, see section [using the application](#using-the-application).
@@ -115,6 +116,7 @@ To access the live deployment of the application, click [here](https://cse-412.h
 
 Below are screenshots of application demonstration.  
 Example - searching a flight and the displayed data results:
+![Screenshot of application query](/images/app-screenshot2.png)
 
 ### Development Enviornment
 The following steps are only necessary for the project developers or users who are looking to implement a version of the project. To view/acces the live version of the appplication, see section on [using the application](#using-the-application).
