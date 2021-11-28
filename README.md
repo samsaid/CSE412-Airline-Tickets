@@ -12,7 +12,13 @@
         - [2.1.2. Push Changes to Heroku Application](#push-changes-to-heroku-application)  
             
 ## About the Project
-Airline Tickets is supported on Linux, macOS, and Windows.
+This repository contains an application "Airline Tickets" which is a React/Node web application connected to the PostgresSQL database managed and deployed via Heroku. The objective of this project is to demonstrate an understanding of a relational database management system. The timeline of this project was completed in three main phases:    
+
+Phase I included researching a topic, development tools, and creating a plan for the rest of the duration of the project. In this portion, we designed the relational database system using an ER diagram to visualize how the database components interact.   
+
+Phase II included creating the database on a selected PostgresSQL database server, and collecting data for the database. In this portion, we've modified our original database design, as we moved furthur along on implementation of the databse. By the end of Phase II, we used SQL to convert the ER Diagram to relational database with tables and relationships.  
+
+Phase III included setting up team development environment and creating the application which can make queries to the database. The application was created in iterations amongst the team members.
 
 ### Tools
 - Visual Studio Code
