@@ -21,6 +21,11 @@ The project was completed in three phases:
 - Phase II included data collection, and creating the database on a PostgresSQL database server. During this phase, we've modified our original database design as we made progress on database implementation and considered the relationships of entities. By the end of Phase II, we used SQL to convert the ER Diagram to a relational database with tables and relationships and inserted the data with SQL into the database.  
 - Phase III included setting up our team development environment and creating the application which can make queries to the database. 
 
+Screenshot of application welcome page:  
+  
+
+To view screenshots of application interacting with the database, see section [using the application](#using-the-application).
+
 ### Tools
 - Visual Studio Code
 - React
