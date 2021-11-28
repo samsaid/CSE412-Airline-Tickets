@@ -24,7 +24,7 @@ The project was completed in three phases:
 Screenshot of application welcome page:  
   
 
-To view screenshots of application interacting with the database, see section [using the application](#using-the-application).
+For a more in depth look at the application, see section [using the application](#using-the-application).
 
 ### Tools
 - Visual Studio Code
@@ -162,5 +162,6 @@ git branch
 ```
 git checkout masterbranch
 git push heroku main
+heroku open
 ```  
-Web page should now be updated. 
+Web page changes should now be displayed.
