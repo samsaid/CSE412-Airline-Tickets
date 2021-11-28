@@ -49,7 +49,7 @@ CREATE TABLE Flight (
     arr_date DATE,
     dep_time TIME(0),
     arr_time TIME(0),
-    flight_capacity,
+    flight_capacity INT,
     PRIMARY KEY (customer_id));
 ```
 Airport table
