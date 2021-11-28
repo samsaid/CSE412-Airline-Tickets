@@ -52,6 +52,17 @@ CREATE TABLE Flight (
     flight_capacity,
     PRIMARY KEY (customer_id));
 ```
+Airport table
+```
+CREATE TABLE Airport (
+    airport_code CHAR(3),
+    airport_name CHAR(60),
+    city CHAR(15),
+    state CHAR(2),
+    country CHAR(2)
+    PRIMARY KEY (airport_code));
+```
+
 Customer table
 ```
 CREATE TABLE Customers(
