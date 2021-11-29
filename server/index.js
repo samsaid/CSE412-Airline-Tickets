@@ -21,6 +21,27 @@ app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
 
+app.get('/getAirports', (req, res) => {
+  let dataResults;
+  pool.query(`SELECT * FROM Airport;`, (err, response) => {
+      if (err) {
+          console.log("Error - Failed to select all from Users");
+          console.log(err);
+      }
+      else{
+        dataResults = response.rows;
+        console.log(dataResults);
+          console.log("well i got the fucking data");
+          //console.log(process.env.DATABASE_URL);
+          //return res.rows;
+          res.json(dataResults);
+          
+      }
+    });
+    //console.log("I GOT THE SHIT");
+    //res.json({results: dataResults});
+});
+
 // All other GET requests not handled before will return our React app
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
@@ -31,7 +52,7 @@ app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
 
-pool.query(`SELECT * FROM Airport;`, (err, res) => {
+/*pool.query(`SELECT * FROM Airport;`, (err, res) => {
   if (err) {
       console.log("Error - Failed to select all from Users");
       console.log(err);
@@ -40,14 +61,6 @@ pool.query(`SELECT * FROM Airport;`, (err, res) => {
       console.log(res.rows);
       console.log(process.env.DATABASE_URL);
   }
-});
+});*/
 
-app.get('/getAirports', (req, res) => {
-  try{
-    let results = pool.query(`SELECT * FROM Airport;`);
-    return results.rows;
-  }
-  catch(error){
-    console.log(error);
-  }
-})
+

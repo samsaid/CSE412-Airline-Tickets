@@ -14,12 +14,28 @@ function App() {
       .then((data) => setData(data.message));
   }, []);
 
-  const [airports, setAirports] = React.useState(null);
+  const [airports, setAirports] = React.useState([]);
   React.useEffect(() => {
     fetch('/getAirports')
       .then((res) => res.json())
-      .then((airports) => setAirports(airports.message));
+      .then((airports) => setAirports(airports))
+      .then(console.log(airports));
   }, []);
+
+
+  let itemsToRender;
+  if (airports) {
+    itemsToRender = airports.map(item => {
+      return (
+        <tr key={item.airport_code}>
+          <td>{ item.airport_code }</td>
+          <td>{ item.airport_name }</td>
+          <td>{ item.city}</td>
+          <td>{ item.state }</td>
+        </tr>
+      );
+    });
+  }
 
   function sayHello() {
     alert('You clicked me!');
@@ -119,7 +135,18 @@ function App() {
 
         <p>Data:</p>
         <br/>
-        <p>{!airports ? "No airport data found" : airports}</p>
+        <table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>City</th>
+      <th>State</th>
+    </tr>
+  </thead>
+  <tbody>{itemsToRender}</tbody>
+  </table>
+        
         </div>
       </div>
 
