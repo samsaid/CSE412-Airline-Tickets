@@ -23,7 +23,8 @@ The project was completed in three phases:
 
 Screenshot of application welcome page:  
 ![Screenshot of application welcome page](/images/app-screenshot1.png)
-  
+  ![image](https://user-images.githubusercontent.com/29154819/143911991-b8f225c9-a360-4072-aef7-44e695b97cce.png)
+
 
 For a more in depth look at the application, see section [using the application](#using-the-application).
 
