@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/samsaid/CSE412-Airline-Tickets#readme",
   "dependencies": {
+    "@material-ui/core": "^5.0.0-beta.5",
     "express": "^4.17.1",
     "react-tabs": "^3.2.3"
   }
