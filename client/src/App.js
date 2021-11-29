@@ -14,6 +14,13 @@ function App() {
       .then((data) => setData(data.message));
   }, []);
 
+  const [airports, setAirports] = React.useState(null);
+  React.useEffect(() => {
+    fetch('/getAirports')
+      .then((res) => res.json())
+      .then((airports) => setAirports(airports.message));
+  }, []);
+
   function sayHello() {
     alert('You clicked me!');
   }
@@ -110,7 +117,9 @@ function App() {
             </form>
           </div>
 
-
+        <p>Data:</p>
+        <br/>
+        <p>{!airports ? "No airport data found" : airports}</p>
         </div>
       </div>
 

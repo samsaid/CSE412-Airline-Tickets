@@ -3,6 +3,13 @@
 const path = require('path');
 const express = require("express");
 const PORT = process.env.PORT || 3001;
+const {Pool} = require('pg');
+const pool = new Pool({
+ connectionString: 'postgres://evzknmwaoazpmy:649ea57a0bc5060870c6e7c40ae05afa8794492aa58ec482eb168aa4d9c1f888@ec2-34-224-239-147.compute-1.amazonaws.com:5432/dbukho2ionepct',
+ ssl: {
+ rejectUnauthorized: false
+ }
+});
 
 const app = express();
 
@@ -23,3 +30,24 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
+
+pool.query(`SELECT * FROM Airport;`, (err, res) => {
+  if (err) {
+      console.log("Error - Failed to select all from Users");
+      console.log(err);
+  }
+  else{
+      console.log(res.rows);
+      console.log(process.env.DATABASE_URL);
+  }
+});
+
+app.get('/getAirports', (req, res) => {
+  try{
+    let results = pool.query(`SELECT * FROM Airport;`);
+    return results.rows;
+  }
+  catch(error){
+    console.log(error);
+  }
+})
