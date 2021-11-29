@@ -67,7 +67,6 @@ function App() {
       .then(console.log(schedule));
   }, []);
 
-<<<<<<< HEAD
   const [airportcode, setAirportCode] = React.useState([]);
   React.useEffect(() => {
     fetch('/getTicketsToAirport')
@@ -75,10 +74,8 @@ function App() {
       .then((airportcode) => setSchedule(airportcode))
       .then(console.log(airportcode));
   }, []);
-=======
 
   const [searchFlightResults, setSearchFlightResults] = React.useState([]);
->>>>>>> a46988b3a40c3a379ef1419c5a5de8a9737f975c
 
   const searchFlights = event => {
     event.preventDefault();
