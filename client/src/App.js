@@ -6,9 +6,17 @@ import './App.css';
 import 'react-tabs/style/react-tabs.css';
 
 
+const formReducer = (state, event) => {
+  return {
+    ...state,
+    [event.name]: event.value
+  }
+ }
 
 function App() {
-
+  
+  const [formData, setFormData] = React.useReducer(formReducer, {});
+  const [submitting, setSubmitting] = React.useState(false);
   const [value, setValue] = React.useState(2);
 
   const [data, setData] = React.useState(null);
@@ -59,6 +67,22 @@ function App() {
       .then(console.log(schedule));
   }, []);
 
+  const searchFlights = event => {
+    event.preventDefault();
+    setSubmitting(true);
+
+    setTimeout(() => {
+      setSubmitting(false);
+    }, 3000)
+  }
+
+  const handleChange = event => {
+    setFormData({
+      name: event.target.name,
+      value: event.target.value,
+    });
+    console.log(formData);
+  }
 
   let airportsToRender;
   if (airports) {
@@ -142,11 +166,6 @@ function App() {
         </tr>
       );
     });
-  }
-
-
-  function sayHello() {
-    alert('You clicked me!');
   }
 
   return (
@@ -290,7 +309,84 @@ function App() {
 
 
         <TabPanel>
-          2nd component
+          <h3>Search Flights</h3>
+         {submitting &&
+       <div>
+         You are submitting the following:
+         <ul>
+           {Object.entries(formData).map(([name, value]) => (
+             <li key={name}><strong>{name}</strong>:{value.toString()}</li>
+           ))}
+         </ul>
+       </div>
+      }
+         <form class="form-inline" onSubmit={searchFlights}>
+      <fieldset class="form-inline">
+        <legend>Travel Dates:</legend>
+         <label>
+           <p>From</p>
+           <input type="date" name="fromDate" min="2022-01-01" max="2025-21-01" onChange={handleChange}/>
+         </label>
+         <label>
+           <p>To</p>
+           <input type="date" name="toDate" min="2022-01-01" max="2025-21-01" onChange={handleChange}/>
+         </label>
+       </fieldset>
+      
+      <fieldset class="form-inline">
+        <legend>Where To?</legend>
+         <label>
+           <p>Leaving</p>
+           <select name="depAirport" onChange={handleChange}>
+             <option value="">--Please choose an option--</option>
+             <option value="ATL">ATL - Hartsfield-Jackson Atlanta International</option>
+             <option value="AUS">AUS - Austin-Bergstrom International</option>
+             <option value="BOS">BOS - Boston Logan International</option>
+             <option value="BWI">BWI - Baltimore/Washington International Thrugood Marshall</option>
+             <option value="DEN">DEN - Denver International</option>
+             <option value="HNL">HNL - Daniel K. Inouye International</option>
+             <option value="IAH">IAH - George Bush Intercontinental</option>
+             <option value="JFK">JFK - John F. Kennedy International</option>
+             <option value="LAX">LAX - Los Angeles International</option>
+             <option value="MSP">MSP - Minneapolis-Saint Paul International</option>
+             <option value="ORD">ORD - O'Hare International</option>
+             <option value="PDX">PDX - Portaln International</option>
+             <option value="PHI">PHI - Philadelphia International</option>
+             <option value="PHX">PHX - Phoenix Sky Harbor International</option>
+             <option value="SEA">SEA - Seattle-Tacoma International</option>
+             <option value="SFO">SFO - San Francisco International</option>
+             <option value="STL">STL - St. Louis Lambert International</option>
+           </select>
+         </label>
+         <label>
+           <p>Headed To</p>
+           <select name="arrAirport" onChange={handleChange}>
+            <option value="">--Please choose an option--</option>
+             <option value="ATL">ATL - Hartsfield-Jackson Atlanta International</option>
+             <option value="AUS">AUS - Austin-Bergstrom International</option>
+             <option value="BOS">BOS - Boston Logan International</option>
+             <option value="BWI">BWI - Baltimore/Washington International Thrugood Marshall</option>
+             <option value="DEN">DEN - Denver International</option>
+             <option value="HNL">HNL - Daniel K. Inouye International</option>
+             <option value="IAH">IAH - George Bush Intercontinental</option>
+             <option value="JFK">JFK - John F. Kennedy International</option>
+             <option value="LAX">LAX - Los Angeles International</option>
+             <option value="MSP">MSP - Minneapolis-Saint Paul International</option>
+             <option value="ORD">ORD - O'Hare International</option>
+             <option value="PDX">PDX - Portaln International</option>
+             <option value="PHI">PHI - Philadelphia International</option>
+             <option value="PHX">PHX - Phoenix Sky Harbor International</option>
+             <option value="SEA">SEA - Seattle-Tacoma International</option>
+             <option value="SFO">SFO - San Francisco International</option>
+             <option value="STL">STL - St. Louis Lambert International</option>
+           </select>
+         </label>
+        </fieldset>
+       <button type="submit">Search Flights</button>
+      </form>
+
+      <br/>
+
         </TabPanel>
 
 

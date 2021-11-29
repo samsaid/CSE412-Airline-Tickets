@@ -29,7 +29,7 @@ app.get('/getAirports', (req, res) => {
       }
       else{
         dataResults = response.rows;
-        console.log(dataResults);
+        //console.log(dataResults);
         res.json(dataResults);
           
       }
@@ -45,7 +45,7 @@ app.get('/getFlights', (req, res) => {
       }
       else{
         dataResults = response.rows;
-        console.log(dataResults);
+        //console.log(dataResults);
         res.json(dataResults);
           
       }
@@ -61,7 +61,7 @@ app.get('/getTickets', (req, res) => {
       }
       else{
         dataResults = response.rows;
-        console.log(dataResults);
+        //console.log(dataResults);
         res.json(dataResults);
           
       }
@@ -77,7 +77,7 @@ app.get('/getCustomers', (req, res) => {
       }
       else{
         dataResults = response.rows;
-        console.log(dataResults);
+        //console.log(dataResults);
         res.json(dataResults);
           
       }
@@ -93,12 +93,32 @@ app.get('/getSchedule', (req, res) => {
       }
       else{
         dataResults = response.rows;
-        console.log(dataResults);
+        //console.log(dataResults);
         res.json(dataResults);
           
       }
     });
 });
+
+
+//SEARCH METHODS
+/*app.get('/searchFlights', (req, res) => {
+  let dataResults;
+  pool.query(`SELECT * FROM Flight where;`, (err, response) => {
+      if (err) {
+          console.log("Error - Failed to select all from Users");
+          console.log(err);
+      }
+      else{
+        dataResults = response.rows;
+        //console.log(dataResults);
+        res.json(dataResults);
+          
+      }
+    });
+});*/
+
+
 
 // All other GET requests not handled before will return our React app
 app.get('*', (req, res) => {
