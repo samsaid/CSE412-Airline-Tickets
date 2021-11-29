@@ -3,9 +3,15 @@
 const path = require('path');
 const express = require("express");
 const PORT = process.env.PORT || 3001;
+const {Pool} = require('pg');
+const pool = new Pool({
+ connectionString: 'postgres://evzknmwaoazpmy:649ea57a0bc5060870c6e7c40ae05afa8794492aa58ec482eb168aa4d9c1f888@ec2-34-224-239-147.compute-1.amazonaws.com:5432/dbukho2ionepct',
+ ssl: {
+ rejectUnauthorized: false
+ }
+});
 
 const app = express();
-
 // Have Node serve the files for our built React app
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
@@ -13,6 +19,106 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
+
+app.get('/getAirports', (req, res) => {
+  let dataResults;
+  pool.query(`SELECT * FROM Airport;`, (err, response) => {
+      if (err) {
+          console.log("Error - Failed to select all from Users");
+          console.log(err);
+      }
+      else{
+        dataResults = response.rows;
+        //console.log(dataResults);
+        res.json(dataResults);
+          
+      }
+    });
+});
+
+app.get('/getFlights', (req, res) => {
+  let dataResults;
+  pool.query(`SELECT * FROM Flight;`, (err, response) => {
+      if (err) {
+          console.log("Error - Failed to select all from Users");
+          console.log(err);
+      }
+      else{
+        dataResults = response.rows;
+        //console.log(dataResults);
+        res.json(dataResults);
+          
+      }
+    });
+});
+
+app.get('/getTickets', (req, res) => {
+  let dataResults;
+  pool.query(`SELECT * FROM Tickets;`, (err, response) => {
+      if (err) {
+          console.log("Error - Failed to select all from Users");
+          console.log(err);
+      }
+      else{
+        dataResults = response.rows;
+        //console.log(dataResults);
+        res.json(dataResults);
+          
+      }
+    });
+});
+
+app.get('/getCustomers', (req, res) => {
+  let dataResults;
+  pool.query(`SELECT * FROM Customers;`, (err, response) => {
+      if (err) {
+          console.log("Error - Failed to select all from Users");
+          console.log(err);
+      }
+      else{
+        dataResults = response.rows;
+        //console.log(dataResults);
+        res.json(dataResults);
+          
+      }
+    });
+});
+
+app.get('/getSchedule', (req, res) => {
+  let dataResults;
+  pool.query(`SELECT * FROM Schedule;`, (err, response) => {
+      if (err) {
+          console.log("Error - Failed to select all from Users");
+          console.log(err);
+      }
+      else{
+        dataResults = response.rows;
+        //console.log(dataResults);
+        res.json(dataResults);
+          
+      }
+    });
+});
+
+
+//SEARCH METHODS
+/*app.get('/searchFlights', (req, res) => {
+  let dataResults;
+  pool.query(`SELECT * FROM Flight where;`, (err, response) => {
+      if (err) {
+          console.log("Error - Failed to select all from Users");
+          console.log(err);
+      }
+      else{
+        dataResults = response.rows;
+        //console.log(dataResults);
+        res.json(dataResults);
+          
+      }
+    });
+});*/
+
+
 
 // All other GET requests not handled before will return our React app
 app.get('*', (req, res) => {
@@ -23,3 +129,5 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
+
+

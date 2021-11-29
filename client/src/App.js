@@ -1,10 +1,23 @@
 import React from 'react'
 import logo from './logo.svg';
+import Paper from "@material-ui/core/Paper";
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import './App.css';
+import 'react-tabs/style/react-tabs.css';
 
 
+const formReducer = (state, event) => {
+  return {
+    ...state,
+    [event.name]: event.value
+  }
+ }
 
 function App() {
+  
+  const [formData, setFormData] = React.useReducer(formReducer, {});
+  const [submitting, setSubmitting] = React.useState(false);
+  const [value, setValue] = React.useState(2);
 
   const [data, setData] = React.useState(null);
   //HTTP request from react to Node..if data is not read yet then Loading will display
@@ -14,10 +27,146 @@ function App() {
       .then((data) => setData(data.message));
   }, []);
 
-  function sayHello() {
-    alert('You clicked me!');
+  const [airports, setAirports] = React.useState([]);
+  React.useEffect(() => {
+    fetch('/getAirports')
+      .then((res) => res.json())
+      .then((airports) => setAirports(airports))
+      .then(console.log(airports));
+  }, []);
+
+  const [flights, setFlights] = React.useState([]);
+  React.useEffect(() => {
+    fetch('/getFlights')
+      .then((res) => res.json())
+      .then((flights) => setFlights(flights))
+      .then(console.log(flights));
+  }, []);
+
+  const [tickets, setTickets] = React.useState([]);
+  React.useEffect(() => {
+    fetch('/getTickets')
+      .then((res) => res.json())
+      .then((tickets) => setTickets(tickets))
+      .then(console.log(tickets));
+  }, []);
+
+  const [customers, setCustomers] = React.useState([]);
+  React.useEffect(() => {
+    fetch('/getCustomers')
+      .then((res) => res.json())
+      .then((customers) => setCustomers(customers))
+      .then(console.log(customers));
+  }, []);
+
+  const [schedule, setSchedule] = React.useState([]);
+  React.useEffect(() => {
+    fetch('/getSchedule')
+      .then((res) => res.json())
+      .then((schedule) => setSchedule(schedule))
+      .then(console.log(schedule));
+  }, []);
+
+  const searchFlights = event => {
+    event.preventDefault();
+    setSubmitting(true);
+
+    setTimeout(() => {
+      setSubmitting(false);
+    }, 3000)
   }
 
+  const handleChange = event => {
+    setFormData({
+      name: event.target.name,
+      value: event.target.value,
+    });
+    console.log(formData);
+  }
+
+  let airportsToRender;
+  if (airports) {
+    airportsToRender = airports.map(item => {
+      return (
+        <tr key={item.airport_code}>
+          <td>{ item.airport_code }</td>
+          <td>{ item.airport_name }</td>
+          <td>{ item.city}</td>
+          <td>{ item.state }</td>
+        </tr>
+      );
+    });
+  }
+
+  let flightsToRender;
+  if (flights) {
+    flightsToRender = flights.map(item => {
+      return (
+        <tr>
+          <td>{ item.flight_number }</td>
+          <td>{ item.airline}</td>
+          <td>{ item.origin_airport}</td>
+          <td>{ item.origin_city }</td>
+          <td>{ item.origin_state}</td>
+          <td>{ item.origin_country}</td>
+          <td>{ item.destination_airport}</td>
+          <td>{ item.destination_city}</td>
+          <td>{ item.destination_state}</td>
+          <td>{ item.destination_country}</td>
+          <td>{ item.dep_date}</td>
+          <td>{ item.dep_time}</td>
+          <td>{ item.arr_date}</td>
+          <td>{ item.arr_time}</td>
+          <td>{ item.flight_capacity}</td>
+          <td>{ item.state }</td>
+        </tr>
+      );
+    });
+  }
+
+
+  let customersToRender;
+  if (customers) {
+    customersToRender = customers.map(item => {
+      return (
+        <tr key={item.customer_id}>
+          <td>{item.customer_id}</td>
+          <td>{ item.first_name}</td>
+          <td>{ item.last_name }</td>
+          <td>{ item.dob}</td>
+        </tr>
+      );
+    });
+  }
+
+
+  let ticketsToRender;
+  if (tickets) {
+    ticketsToRender = tickets.map(item => {
+      return (
+        <tr key={item.ticket_id}>
+          <td>{ item.ticket_id }</td>
+          <td>{ item.flight_number}</td>
+          <td>{ item.price_usd}</td>
+        </tr>
+      );
+    });
+  }
+
+
+  let scheduleToRender;
+  if (schedule) {
+    scheduleToRender = schedule.map(item => {
+      return (
+        <tr key={item.schedule_id}>
+          <td>{item.schedule_id}</td>
+          <td>{ item.ticket_id}</td>
+          <td>{ item.flight_number}</td>
+          <td>{ item.cust_id}</td>
+        </tr>
+      );
+    });
+  }
 
   return (
 
@@ -31,10 +180,7 @@ function App() {
 
       </div>
 
-
-      <div class="parallax" style={{ fontFamily: "Lucida Sans ", color: 'white', textAlign: 'left', fontSize: 45, fontWeight: 700, padding: 15 }}> Flight Booking Simulator</div>
-
-      <div style={{ height: 400, fontSize: 20, backgroundColor: 'white' }}>
+      <div style={{ height: 800, fontSize: 20, backgroundColor: 'white' }}>
 
 
         {/*
@@ -46,77 +192,224 @@ function App() {
         }
         <div class="container">
 
+        <h2>Flight Booking Simulator - Group 25</h2>
+        <h5>Anjali Singh, Christine Pascua, Kaitlyn Allen, Samira Said</h5>
+      <Paper square>
+        <Tabs>
+          <TabList>
+          <Tab>View All Tables</Tab>
+          <Tab>Search Flights</Tab>
+          <Tab>Search Tickets</Tab>
+          <Tab>Search People</Tab>
+          <Tab>Search Airports</Tab>
+          </TabList>
+          
+          <TabPanel>
+            <h3>View All Tables</h3>
+            <Tabs>
+            <TabList>
+              <Tab>Flights</Tab>
+              <Tab>Airport</Tab>
+              <Tab>Customers</Tab>
+              <Tab>Schedule</Tab>
+              <Tab>Tickets</Tab>
+            </TabList>
 
-          <div id="col" >
-
-
-            <button class="button" onClick={sayHello}>Button</button>
-
-            <select >
-              <option class="textinput" placeholder="Comment">Trip Type</option>
-
-              <option value="option 1"> Option 1 </option>
-              <option value="option 2"> Option 2 </option>
-
-            </select>
-
-            <select >
-              <option class="textinput" placeholder="Comment">Trip Type</option>
-
-              <option value="option 1"> Option 1 </option>
-              <option value="option 2"> Option 2 </option>
-
-            </select>
-
-            <select >
-              <option class="textinput" placeholder="Comment">Trip Type</option>
-
-              <option value="option 1"> Option 1 </option>
-              <option value="option 2"> Option 2 </option>
-
-            </select>
-          </div>
-
-
-
-
-
-          <div id="textbox1">
-            <form >
-
-
-              <label style={{ fontFamily: "Circular,Arial,sans-serif,", fontWeight: 700 }}> Travel Dates:
-                <input type="text" style={{ padding: 12 }} />
-              </label>
-            </form>
-          </div>
-
-
-          <div id="textbox2">
-            <form>
-
-              <label style={{ fontFamily: "Circular,Arial,sans-serif,", fontWeight: 700 }}>Departing From:
-                <input type="text" style={{ padding: 12 }} />
-              </label>
-            </form>
-          </div>
-
-          <div id="textbox3">
-            <form>
-
-              <label style={{ fontFamily: "Circular,Arial,sans-serif,", fontWeight: 700 }}>Departing From:
-                <input type="text" style={{ padding: 12 }} />
-              </label>
-            </form>
-          </div>
+            <TabPanel>
+              <h5>Flights</h5>
+              <table class="center">
+      <thead>
+        <tr>
+          <th>Flight #</th>
+          <th>Airline</th>
+          <th>Origin Airport</th>
+          <th>Origin City</th>
+          <th>Origin State</th>
+          <th>Origin Country</th>
+          <th>Destination Airport</th>
+          <th>Destination City</th>
+          <th>Destination State</th>
+          <th>Destination Country</th>
+          <th>Departure Date</th>
+          <th>Departure Time</th>
+          <th>Arrival Date</th>
+          <th>Arrival Time</th>
+          <th>Flight Capacity</th>
+        </tr>
+      </thead>
+      <tbody>{flightsToRender}</tbody>
+      </table>
+            </TabPanel>
 
 
+            <TabPanel>
+              <h5>Airports</h5>
+              <table class="center">
+      <thead>
+        <tr>
+          <th>Airport Code</th>
+          <th>Name</th>
+          <th>City</th>
+          <th>State</th>
+        </tr>
+      </thead>
+      <tbody>{airportsToRender}</tbody>
+      </table>
+            </TabPanel>
+
+
+            <TabPanel>
+              <h5>Customers</h5>
+              <table class="center">
+      <thead>
+        <tr>
+          <th>Customer ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>D.O.B</th>
+        </tr>
+      </thead>
+      <tbody>{customersToRender}</tbody>
+      </table>
+            </TabPanel>
+
+
+            <TabPanel>
+              <h5>Schedule</h5>
+              <table class="center">
+      <thead>
+        <tr>
+          <th>Schedule ID</th>
+          <th>Ticket ID</th>
+          <th>Flight #</th>
+          <th>Customer ID</th>
+        </tr>
+      </thead>
+      <tbody>{scheduleToRender}</tbody>
+      </table>
+            </TabPanel>
+
+
+            <TabPanel>
+              <h5>Tickets</h5>
+              <table class="center">
+      <thead>
+        <tr>
+          <th>Ticket ID</th>
+          <th>Flight #</th>
+          <th>Price ($USD)</th>
+        </tr>
+      </thead>
+      <tbody>{ticketsToRender}</tbody>
+      </table>
+            </TabPanel>
+
+</Tabs>
+        </TabPanel>
+
+
+        <TabPanel>
+          <h3>Search Flights</h3>
+         {submitting &&
+       <div>
+         You are submitting the following:
+         <ul>
+           {Object.entries(formData).map(([name, value]) => (
+             <li key={name}><strong>{name}</strong>:{value.toString()}</li>
+           ))}
+         </ul>
+       </div>
+      }
+         <form class="form-inline" onSubmit={searchFlights}>
+      <fieldset class="form-inline">
+        <legend>Travel Dates:</legend>
+         <label>
+           <p>From</p>
+           <input type="date" name="fromDate" min="2022-01-01" max="2025-21-01" onChange={handleChange}/>
+         </label>
+         <label>
+           <p>To</p>
+           <input type="date" name="toDate" min="2022-01-01" max="2025-21-01" onChange={handleChange}/>
+         </label>
+       </fieldset>
+      
+      <fieldset class="form-inline">
+        <legend>Where To?</legend>
+         <label>
+           <p>Leaving</p>
+           <select name="depAirport" onChange={handleChange}>
+             <option value="">--Please choose an option--</option>
+             <option value="ATL">ATL - Hartsfield-Jackson Atlanta International</option>
+             <option value="AUS">AUS - Austin-Bergstrom International</option>
+             <option value="BOS">BOS - Boston Logan International</option>
+             <option value="BWI">BWI - Baltimore/Washington International Thrugood Marshall</option>
+             <option value="DEN">DEN - Denver International</option>
+             <option value="HNL">HNL - Daniel K. Inouye International</option>
+             <option value="IAH">IAH - George Bush Intercontinental</option>
+             <option value="JFK">JFK - John F. Kennedy International</option>
+             <option value="LAX">LAX - Los Angeles International</option>
+             <option value="MSP">MSP - Minneapolis-Saint Paul International</option>
+             <option value="ORD">ORD - O'Hare International</option>
+             <option value="PDX">PDX - Portaln International</option>
+             <option value="PHI">PHI - Philadelphia International</option>
+             <option value="PHX">PHX - Phoenix Sky Harbor International</option>
+             <option value="SEA">SEA - Seattle-Tacoma International</option>
+             <option value="SFO">SFO - San Francisco International</option>
+             <option value="STL">STL - St. Louis Lambert International</option>
+           </select>
+         </label>
+         <label>
+           <p>Headed To</p>
+           <select name="arrAirport" onChange={handleChange}>
+            <option value="">--Please choose an option--</option>
+             <option value="ATL">ATL - Hartsfield-Jackson Atlanta International</option>
+             <option value="AUS">AUS - Austin-Bergstrom International</option>
+             <option value="BOS">BOS - Boston Logan International</option>
+             <option value="BWI">BWI - Baltimore/Washington International Thrugood Marshall</option>
+             <option value="DEN">DEN - Denver International</option>
+             <option value="HNL">HNL - Daniel K. Inouye International</option>
+             <option value="IAH">IAH - George Bush Intercontinental</option>
+             <option value="JFK">JFK - John F. Kennedy International</option>
+             <option value="LAX">LAX - Los Angeles International</option>
+             <option value="MSP">MSP - Minneapolis-Saint Paul International</option>
+             <option value="ORD">ORD - O'Hare International</option>
+             <option value="PDX">PDX - Portaln International</option>
+             <option value="PHI">PHI - Philadelphia International</option>
+             <option value="PHX">PHX - Phoenix Sky Harbor International</option>
+             <option value="SEA">SEA - Seattle-Tacoma International</option>
+             <option value="SFO">SFO - San Francisco International</option>
+             <option value="STL">STL - St. Louis Lambert International</option>
+           </select>
+         </label>
+        </fieldset>
+       <button type="submit">Search Flights</button>
+      </form>
+
+      <br/>
+
+        </TabPanel>
+
+
+        <TabPanel>
+          3rdd component
+        </TabPanel>
+
+
+        <TabPanel>
+          4th component
+        </TabPanel>
+
+
+        <TabPanel>
+          5th component
+        </TabPanel>
+
+
+        </Tabs>
+        
+      </Paper>
+        
         </div>
-      </div>
-
-      <div class="bg2">
-
-
       </div>
 
     </div>
