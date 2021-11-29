@@ -23,6 +23,7 @@
   "dependencies": {
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
+<<<<<<< HEAD
     "@material-ui/core": "^4.12.3",
     "@mui/material": "^5.2.2",
     "@types/react-transition-group": "^4.4.4",
@@ -31,5 +32,11 @@
     "pg": "^8.7.1",
     "react-tabs": "^3.2.3",
     "react-transition-group": "^4.4.2"
+=======
+    "@material-ui/core": "^5.0.0-beta.5",
+    "express": "^4.17.1",
+    "pg": "^8.7.1",
+    "react-tabs": "^3.2.3"
+>>>>>>> a46988b3a40c3a379ef1419c5a5de8a9737f975c
   }
 }

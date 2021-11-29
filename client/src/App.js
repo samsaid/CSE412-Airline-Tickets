@@ -67,6 +67,7 @@ function App() {
       .then(console.log(schedule));
   }, []);
 
+<<<<<<< HEAD
   const [airportcode, setAirportCode] = React.useState([]);
   React.useEffect(() => {
     fetch('/getTicketsToAirport')
@@ -74,6 +75,10 @@ function App() {
       .then((airportcode) => setSchedule(airportcode))
       .then(console.log(airportcode));
   }, []);
+=======
+
+  const [searchFlightResults, setSearchFlightResults] = React.useState([]);
+>>>>>>> a46988b3a40c3a379ef1419c5a5de8a9737f975c
 
   const searchFlights = event => {
     event.preventDefault();
@@ -82,6 +87,12 @@ function App() {
     setTimeout(() => {
       setSubmitting(false);
     }, 3000)
+    
+    fetch('/searchFlights?fromDate='+formData.fromDate+'&depAirport='+formData.depAirport+'&arrAirport='+formData.arrAirport)
+        .then((res) => res.json())
+        .then((searchFlightResults) => setSearchFlightResults(searchFlightResults))
+        .then(console.log(searchFlightResults));
+      
   }
 
   const handleChange = event => {
@@ -318,31 +329,13 @@ function App() {
 
         <TabPanel>
           <h3>Search Flights</h3>
-         {submitting &&
-       <div>
-         You are submitting the following:
-         <ul>
-           {Object.entries(formData).map(([name, value]) => (
-             <li key={name}><strong>{name}</strong>:{value.toString()}</li>
-           ))}
-         </ul>
-       </div>
-      }
          <form class="form-inline" onSubmit={searchFlights}>
       <fieldset class="form-inline">
-        <legend>Travel Dates:</legend>
+        <legend>Travel Information:</legend>
          <label>
            <p>From</p>
            <input type="date" name="fromDate" min="2022-01-01" max="2025-21-01" onChange={handleChange}/>
          </label>
-         <label>
-           <p>To</p>
-           <input type="date" name="toDate" min="2022-01-01" max="2025-21-01" onChange={handleChange}/>
-         </label>
-       </fieldset>
-      
-      <fieldset class="form-inline">
-        <legend>Where To?</legend>
          <label>
            <p>Leaving</p>
            <select name="depAirport" onChange={handleChange}>
@@ -389,12 +382,39 @@ function App() {
              <option value="STL">STL - St. Louis Lambert International</option>
            </select>
          </label>
-        </fieldset>
+       </fieldset>
        <button type="submit">Search Flights</button>
       </form>
 
       <br/>
-
+        {!searchFlightResults ? <p>No data found on your search criteria. Please try different values</p> :
+        <div>
+        <table class="center">
+        <thead>
+          <tr>
+            <th>Airline</th>
+            <th>Trip</th>
+            <th>Departure Time</th>
+            <th>Arrival Date</th>
+            <th>Arrival Time</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>{searchFlightResults.map(item => {
+      return (
+        <tr>
+          <td>{ item.airline}</td>
+          <td><strong>{ item.origin_airport}</strong> to <strong>{ item.destination_airport}</strong> </td>
+          <td>{ item.dep_time}</td>
+          <td>{ item.arr_date}</td>
+          <td>{ item.arr_time}</td>
+          <td>${ item.price_usd }</td>
+        </tr>
+      );
+        })}
+        </tbody>
+        </table>
+        </div>}
         </TabPanel>
 
 
