@@ -100,6 +100,37 @@ app.get('/getSchedule', (req, res) => {
     });
 });
 
+app.get('/getPeopleHeadedTo', (req, res) => {
+  let dataResults;
+  pool.query(`SELECT * FROM Schedule;`, (err, response) => {
+      if (err) {
+          console.log("Error - Failed to select all from Users");
+          console.log(err);
+      }
+      else{
+        dataResults = response.rows;
+        //console.log(dataResults);
+        res.json(dataResults);
+          
+      }
+    });
+});
+
+app.get('/getTicketsOnFlight', (req, res) => {
+  let dataResults;
+  pool.query(`SELECT ticket_id, price_usd FROM Tickets JOIN Flight ON Tickets.flight_number=Flight.flight_number JOIN Airport ON Flight.destination_airport=Airport.airport_code  WHERE Airport.airport_code=``${airport}``';`, (err, response) => {
+      if (err) {
+          console.log("Error - Failed to select all from Users");
+          console.log(err);
+      }
+      else{
+        dataResults = response.rows;
+        //console.log(dataResults);
+        res.json(dataResults);
+          
+      }
+    });
+});
 
 //SEARCH METHODS
 /*app.get('/searchFlights', (req, res) => {

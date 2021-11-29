@@ -67,6 +67,14 @@ function App() {
       .then(console.log(schedule));
   }, []);
 
+  const [airportcode, setAirportCode] = React.useState([]);
+  React.useEffect(() => {
+    fetch('/getTicketsToAirport')
+      .then((res) => res.json())
+      .then((airportcode) => setSchedule(airportcode))
+      .then(console.log(airportcode));
+  }, []);
+
   const searchFlights = event => {
     event.preventDefault();
     setSubmitting(true);
@@ -338,7 +346,7 @@ function App() {
          <label>
            <p>Leaving</p>
            <select name="depAirport" onChange={handleChange}>
-             <option value="">--Please choose an option--</option>
+             <option value="">--Please select an Airport--</option>
              <option value="ATL">ATL - Hartsfield-Jackson Atlanta International</option>
              <option value="AUS">AUS - Austin-Bergstrom International</option>
              <option value="BOS">BOS - Boston Logan International</option>
@@ -391,12 +399,76 @@ function App() {
 
 
         <TabPanel>
-          3rdd component
+           <h3>Search Tickets Arriving At Airport</h3>
+          <form class="form-inline" onSubmit={searchFlights}>
+      
+      <fieldset class="form-inline">
+        
+         <label>
+           <p>Select an Airport Code</p>
+           <select name="arrAirport" onChange={handleChange}>
+            <option value="">--Please choose an option--</option>
+             <option value="ATL">ATL</option>
+             <option value="AUS">AUS</option>
+             <option value="BOS">BOS</option>
+             <option value="BWI">BWI</option>
+             <option value="DEN">DEN</option>
+             <option value="HNL">HNL</option>
+             <option value="IAH">IAH</option>
+             <option value="JFK">JFK</option>
+             <option value="LAX">LAX</option>
+             <option value="MSP">MSP</option>
+             <option value="ORD">ORD</option>
+             <option value="PDX">PDX</option>
+             <option value="PHI">PHI</option>
+             <option value="PHX">PHX</option>
+             <option value="SEA">SEA</option>
+             <option value="SFO">SFO</option>
+             <option value="STL">STL</option>
+           </select>
+         </label>
+        </fieldset>
+       <button type="submit">Search Tickets</button>
+      </form>
         </TabPanel>
 
 
         <TabPanel>
           4th component
+          <form class="form-inline" onSubmit={searchFlights}>
+      
+      <fieldset class="form-inline">
+        <legend>Where To?</legend>
+         <label>
+          First Name:
+        <input type="text" name="name" />
+         </label>
+         <label>
+           <p>Headed To</p>
+           <select name="arrAirport" onChange={handleChange}>
+            <option value="">--Please choose an option--</option>
+             <option value="ATL">ATL - Hartsfield-Jackson Atlanta International</option>
+             <option value="AUS">AUS - Austin-Bergstrom International</option>
+             <option value="BOS">BOS - Boston Logan International</option>
+             <option value="BWI">BWI - Baltimore/Washington International Thrugood Marshall</option>
+             <option value="DEN">DEN - Denver International</option>
+             <option value="HNL">HNL - Daniel K. Inouye International</option>
+             <option value="IAH">IAH - George Bush Intercontinental</option>
+             <option value="JFK">JFK - John F. Kennedy International</option>
+             <option value="LAX">LAX - Los Angeles International</option>
+             <option value="MSP">MSP - Minneapolis-Saint Paul International</option>
+             <option value="ORD">ORD - O'Hare International</option>
+             <option value="PDX">PDX - Portaln International</option>
+             <option value="PHI">PHI - Philadelphia International</option>
+             <option value="PHX">PHX - Phoenix Sky Harbor International</option>
+             <option value="SEA">SEA - Seattle-Tacoma International</option>
+             <option value="SFO">SFO - San Francisco International</option>
+             <option value="STL">STL - St. Louis Lambert International</option>
+           </select>
+         </label>
+        </fieldset>
+       <button type="submit">Search Flights</button>
+      </form>
         </TabPanel>
 
 
