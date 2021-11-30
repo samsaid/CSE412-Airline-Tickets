@@ -275,7 +275,7 @@ const searchCustomerSchedule = event => {
         }
         <div class="container">
 
-        <h2>Flight Booking Simulator - Group 25</h2>
+        <h2>Flight Bookings - Group 25</h2>
         <h5>Anjali Singh, Christine Pascua, Kaitlyn Allen, Samira Said</h5>
       <Paper square>
         <Tabs>
@@ -289,6 +289,7 @@ const searchCustomerSchedule = event => {
           
           <TabPanel>
             <h3>View All Tables</h3>
+            <p>SQL Query: SELECT * FROM Table</p>
             <Tabs>
             <TabList>
               <Tab>Flights</Tab>
@@ -393,6 +394,8 @@ const searchCustomerSchedule = event => {
 
         <TabPanel>
           <h3>Search Flights</h3>
+          <p>SQL Query: SELECT DISTINCT Flight.*, Tickets.price_usd FROM Flight LEFT JOIN Tickets ON Tickets.flight_number=flight.flight_number WHERE dep_date='user input' AND origin_airport='user input' AND destination_airport='user input';</p>
+
          <form class="form-inline" onSubmit={searchFlights}>
       <fieldset class="form-inline">
         <legend>Travel Information:</legend>
@@ -446,8 +449,9 @@ const searchCustomerSchedule = event => {
              <option value="STL">STL - St. Louis Lambert International</option>
            </select>
          </label>
+         <button type="submit">Search Flights</button>
        </fieldset>
-       <button type="submit">Search Flights</button>
+       
        
       </form>
 
@@ -484,6 +488,7 @@ const searchCustomerSchedule = event => {
 
         <TabPanel>
            <h3>Search Tickets Arriving At an Airport</h3>
+           <p>SQL Query: SELECT * FROM Tickets JOIN Flight ON Tickets.flight_number = Flight.flight_number JOIN Airport ON Flight.destination_airport=Airport.airport_code WHERE Airport.airport_code='user input'</p>
           <form class="form-inline" onSubmit={searchTicketsGoingTo}> 
       <fieldset class="form-inline">
          <label>
@@ -511,6 +516,7 @@ const searchCustomerSchedule = event => {
          </label>
         </fieldset>
        <button type="submit">Search Tickets</button>
+       
       </form>
 
       <br/>
@@ -549,6 +555,7 @@ const searchCustomerSchedule = event => {
 
         <TabPanel>
         <h3>Search a Customer's Schedule</h3> 
+        <p>SQL Query: SELECT * FROM Schedule JOIN Customers ON Schedule.cust_id=Customers.customer_id WHERE Customers.first_name='user input' AND Customers.last_name='user input';</p>
           <form class="form-inline" onSubmit={searchCustomerSchedule}> 
       <fieldset class="form-ineline">
          <label>

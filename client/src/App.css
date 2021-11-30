@@ -26,7 +26,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #61a9fb;
 }
 
 .parallax{
@@ -99,27 +99,35 @@
 }
 
 tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #dddaff;
 }
 
+.container{
+  max-width: 100vw;
+  padding-right: 0px;
+}
 .center {
   margin-left: auto;
   margin-right: auto;
+  min-width:100%; 
+  max-width: inherit;
+
 }
 
 .table{
-  height:50px;
-  max-width: fit-content;
-  overflow-y: scroll;
+  table-layout:unset !important;
+border-collapse: collapse;
+  max-width: 100vw;
+    word-wrap: break-word;
 }
 
 th, td {
-  padding: 15px;
   text-align: center;
 }
 
+
 tbody tr:hover {
-  background-color: dodgerblue;
+  background-color: rgb(136, 134, 255);
   color: #fff;
 }
 
@@ -129,7 +137,7 @@ tbody th:hover  {
 
 /* Style the form - display items horizontally */
 .form-inline {
-  display: flex;
+  display: inline-block;
   flex-flow: row wrap;
   align-items: center;
 }
@@ -151,17 +159,17 @@ tbody th:hover  {
 /* Style the submit button */
 .form-inline button {
   padding: 10px 20px;
-  background-color: dodgerblue;
+  background-color: rgb(68, 101, 209);
   border: 1px solid #ddd;
   color: white;
 }
 
 .form-inline button:hover {
-  background-color: royalblue;
+  background-color: rgb(82, 122, 252);
 }
 
 /* Add responsiveness - display the form controls vertically instead of horizontally on screens that are less than 800px wide */
-@media (max-width: 800px) {
+/*@media (max-width: 800px) {
   .form-inline input {
     margin: 10px 0;
   }
@@ -170,4 +178,4 @@ tbody th:hover  {
     flex-direction: column;
     align-items: stretch;
   }
-}
+}*/
