@@ -452,7 +452,7 @@ const searchCustomerSchedule = event => {
       </form>
 
       <br/>
-        {!searchFlightResults ? <p>No data found on your search criteria. Please try different values</p> :
+        {searchFlightResults.length==0 ? <h3>Sorry we don't have any flights avaliable for the information you selected. <br/>Please alter your search criteria.</h3>  :
         <div>
         <table class="center">
         <thead>
@@ -465,7 +465,7 @@ const searchCustomerSchedule = event => {
             <th>Price</th>
           </tr>
         </thead>
-        <tbody>{searchFlightResults.map(item => {
+        <tbody> {searchFlightResults.map(item => {
       return (
         <tr>
           <td>{ item.airline}</td>
@@ -476,8 +476,7 @@ const searchCustomerSchedule = event => {
           <td>${ item.price_usd }</td>
         </tr>
       );
-        })}
-        </tbody>
+        })}</tbody>
         </table>
         </div>}
         </TabPanel>
