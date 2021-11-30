@@ -134,12 +134,11 @@ app.get('/getTicketsOnFlight', (req, res) => {
 
 //SEARCH METHODS
 app.get('/searchFlights', (req, res) => {
-  console.log("req2" + req.query.fromDate);
   const fromDate = req.query.fromDate;
-  //const toDate = req.query.toDate;
   const depAirport = req.query.depAirport;
   const arrAirport = req.query.arrAirport;
 
+  if(fromDate != 'undefined'){
   let dataResults;
   pool.query(`SELECT DISTINCT Flight.*, Tickets.price_usd FROM Flight LEFT JOIN Tickets ON Tickets.flight_number=flight.flight_number WHERE dep_date=$1 AND origin_airport=$2 AND destination_airport=$3;`,[fromDate, depAirport, arrAirport],
    (err, response) => {
@@ -155,6 +154,24 @@ app.get('/searchFlights', (req, res) => {
           
       }
     });
+  }
+
+  else{
+    pool.query(`SELECT DISTINCT Flight.*, Tickets.price_usd FROM Flight LEFT JOIN Tickets ON Tickets.flight_number=flight.flight_number WHERE origin_airport=$1 AND destination_airport=$2;`,[depAirport, arrAirport],
+   (err, response) => {
+      if (err) {
+          console.log("Error - Failed to complete query");
+          console.log(err);
+      }
+      else{
+        console.log("req1");
+        dataResults = response.rows;
+        console.log(dataResults);
+        res.json(dataResults);
+          
+      }
+    });
+  }
     
 });
 
