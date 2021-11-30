@@ -109,7 +109,22 @@ tr:nth-child(even) {
 
 .table{
   height:50px;
-  overflow:auto;
+  max-width: fit-content;
+  overflow-y: scroll;
+}
+
+th, td {
+  padding: 15px;
+  text-align: center;
+}
+
+tbody tr:hover {
+  background-color: dodgerblue;
+  color: #fff;
+}
+
+tbody th:hover  {
+  background-color:none !important;
 }
 
 /* Style the form - display items horizontally */
