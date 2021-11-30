@@ -13,7 +13,10 @@ const formReducer = (state, event) => {
   }
  }
 
+
+
 function App() {
+
   
   const [formData, setFormData] = React.useReducer(formReducer, {});
   const [submitting, setSubmitting] = React.useState(false);
@@ -66,15 +69,79 @@ function App() {
       .then((schedule) => setSchedule(schedule))
       .then(console.log(schedule));
   }, []);
-
+/*
   const [airportcode, setAirportCode] = React.useState([]);
-  React.useEffect(() => {
-    fetch('/getTicketsToAirport')
+  const searchTicketsGoingTo = event => {
+    event.preventDefault();
+    setSubmitting(true);
+
+    setTimeout(() => {
+      setSubmitting(false);
+    }, 3000)
+  }
+*/
+  /*React.useEffect(() => {
+    fetch('/getTicketsToAirport', input)
       .then((res) => res.json())
       .then((airportcode) => setSchedule(airportcode))
       .then(console.log(airportcode));
   }, []);
+*/
+//TICKETS
+//const [searchTicketsResults, setSearchTicketsResults] = React.useState([]);
+/*
+const searchTicketsToAirport = event => {
+  event.preventDefault();
+  setSubmitting(true);
 
+  setTimeout(() => {
+    setSubmitting(false);
+  }, 3000)
+  
+  fetch('/searchTicketsToAirport')
+      .then((res) => res.json())
+      .then((searchTicketsResults) => setSearchTicketsResults(searchTicketsResults))
+      .then(console.log(searchTicketsResults));
+
+}
+*/
+
+//TICKETS GOING TO
+  const [searchTicketsGoingToResults, setSearchTicketsGoingToResults] = React.useState([]);
+
+  const searchTicketsGoingTo = event => {
+    event.preventDefault();
+    setSubmitting(true);
+
+    setTimeout(() => {
+      setSubmitting(false);
+    }, 3000)
+    
+    fetch('/searchTicketsToAirport?&depAirport='+formData.depAirport)
+        .then((res) => res.json())
+        .then((searchTicketsGoingToResults) => setSearchTicketsGoingToResults(searchTicketsGoingToResults))
+        .then(console.log(searchTicketsGoingToResults));
+  }
+
+//SEARCH CUSTOMERS SCHEDULE
+const [searchCustomerResults, setSearchCustomerResults] = React.useState([]);
+
+const searchCustomerSchedule = event => {
+  event.preventDefault();
+  setSubmitting(true);
+
+  setTimeout(() => {
+    setSubmitting(false);
+  }, 3000)
+  
+  fetch('/searchCustomerSchedule?&first_name='+formData.first_name+'&last_name='+formData.last_name)
+      .then((res) => res.json())
+      .then((searchCustomerResults) => setSearchCustomerResults(searchCustomerResults))
+      .then(console.log(searchCustomerResults));
+}
+
+
+//FLIGHTS
   const [searchFlightResults, setSearchFlightResults] = React.useState([]);
 
   const searchFlights = event => {
@@ -89,7 +156,7 @@ function App() {
         .then((res) => res.json())
         .then((searchFlightResults) => setSearchFlightResults(searchFlightResults))
         .then(console.log(searchFlightResults));
-      
+
   }
 
   const handleChange = event => {
@@ -381,6 +448,7 @@ function App() {
          </label>
        </fieldset>
        <button type="submit">Search Flights</button>
+       
       </form>
 
       <br/>
@@ -415,53 +483,12 @@ function App() {
 
 
         <TabPanel>
-           <h3>Search Tickets Arriving At Airport</h3>
-          <form class="form-inline" onSubmit={searchFlights}>
-      
+           <h3>Search Tickets Arriving At an Airport</h3>
+          <form class="form-inline" onSubmit={searchTicketsGoingTo}> 
       <fieldset class="form-inline">
-        
          <label>
-           <p>Select an Airport Code</p>
-           <select name="arrAirport" onChange={handleChange}>
-            <option value="">--Please choose an option--</option>
-             <option value="ATL">ATL</option>
-             <option value="AUS">AUS</option>
-             <option value="BOS">BOS</option>
-             <option value="BWI">BWI</option>
-             <option value="DEN">DEN</option>
-             <option value="HNL">HNL</option>
-             <option value="IAH">IAH</option>
-             <option value="JFK">JFK</option>
-             <option value="LAX">LAX</option>
-             <option value="MSP">MSP</option>
-             <option value="ORD">ORD</option>
-             <option value="PDX">PDX</option>
-             <option value="PHI">PHI</option>
-             <option value="PHX">PHX</option>
-             <option value="SEA">SEA</option>
-             <option value="SFO">SFO</option>
-             <option value="STL">STL</option>
-           </select>
-         </label>
-        </fieldset>
-       <button type="submit">Search Tickets</button>
-      </form>
-        </TabPanel>
-
-
-        <TabPanel>
-          4th component
-          <form class="form-inline" onSubmit={searchFlights}>
-      
-      <fieldset class="form-inline">
-        <legend>Where To?</legend>
-         <label>
-          First Name:
-        <input type="text" name="name" />
-         </label>
-         <label>
-           <p>Headed To</p>
-           <select name="arrAirport" onChange={handleChange}>
+         <p>Select an Airport</p>
+           <select name="depAirport" onChange={handleChange}>
             <option value="">--Please choose an option--</option>
              <option value="ATL">ATL - Hartsfield-Jackson Atlanta International</option>
              <option value="AUS">AUS - Austin-Bergstrom International</option>
@@ -483,8 +510,92 @@ function App() {
            </select>
          </label>
         </fieldset>
-       <button type="submit">Search Flights</button>
+       <button type="submit">Search Tickets</button>
       </form>
+
+      <br/>
+        {!searchTicketsGoingToResults ? <p>No data found on your search criteria. Please try different values</p> :
+        <div>
+        <table class="center">
+        <thead>
+          <tr>
+          <th>Ticket ID</th>
+            <th>Airport Code</th>
+            <th>Airport Name</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Flight Number</th>
+            <th>Price USD</th>
+          </tr>
+        </thead>
+        <tbody>{searchTicketsGoingToResults.map(item => {
+      return (
+        <tr>
+           <td>{ item.ticket_id}</td>
+          <td>{ item.airport_code}</td>
+          <td>{ item.airport_name}</td>
+          <td>{ item.destination_city}</td>
+          <td>{ item.destination_state}</td>
+          <td>{ item.flight_number}</td>
+          <td>${ item.price_usd }</td>
+        </tr>
+      );
+        })}
+        </tbody>
+        </table>
+        </div>}
+        </TabPanel>
+
+
+        <TabPanel>
+        <h3>Search a Customer's Schedule</h3> 
+          <form class="form-inline" onSubmit={searchCustomerSchedule}> 
+      <fieldset class="form-ineline">
+         <label>
+         <p><b>Enter a Customer's Name</b></p> <p>Names from Customers Table must be used. For Example, (Eugene Sullivan, Brian Bryant) </p>
+         <label>
+    First Name:
+    <input type="text" name="first_name" onChange={handleChange}/>
+  </label> <p></p>
+  <label>
+    Last Name:
+    <input type="text" name="last_name" onChange={handleChange}/>
+  </label>
+         </label>
+        </fieldset>
+       <button type="submit">Search Customer</button>
+      </form>
+
+      <br/>
+        {!searchCustomerResults ? <p>No data found on your search criteria. Please try different values</p> :
+        <div>
+        <table class="center">
+        <thead>
+          <tr>
+            <th>Schedule ID</th>
+            <th>Ticket ID</th>
+            <th>Flight Number</th>
+            <th>Customer ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+          </tr>
+        </thead>
+        <tbody>{searchCustomerResults.map(item => {
+      return (
+        <tr>
+          <td>{ item.schedule_id}</td>
+          <td>{ item.ticket_id}</td>
+          <td>{ item.flight_number}</td>
+          <td>{ item.cust_id}</td>
+          <td>{ item.customer_id}</td>
+          <td>{ item.first_name}</td>
+          <td>{ item.last_name}</td>
+        </tr>
+      );
+        })}
+        </tbody>
+        </table>
+        </div>}
         </TabPanel>
 
 
