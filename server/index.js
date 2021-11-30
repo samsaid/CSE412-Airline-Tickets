@@ -47,7 +47,6 @@ app.get('/getFlights', (req, res) => {
         dataResults = response.rows;
         //console.log(dataResults);
         res.json(dataResults);
-          
       }
     });
 });
@@ -116,16 +115,16 @@ app.get('/getPeopleHeadedTo', (req, res) => {
     });
 });
 
-app.get('/getTicketsOnFlight', (req, res) => {
+app.get('/searchTickets', (req, res) => {
   let dataResults;
-  pool.query(`SELECT ticket_id, price_usd FROM Tickets JOIN Flight ON Tickets.flight_number=Flight.flight_number JOIN Airport ON Flight.destination_airport=Airport.airport_code  WHERE Airport.airport_code=``${airport}``';`, (err, response) => {
+  pool.query(`SELECT ticket_id FROM Tickets`, (err, response) => {
       if (err) {
           console.log("Error - Failed to select all from Users");
           console.log(err);
       }
       else{
         dataResults = response.rows;
-        //console.log(dataResults);
+        console.log(dataResults);
         res.json(dataResults);
           
       }
@@ -158,6 +157,52 @@ app.get('/searchFlights', (req, res) => {
     
 });
 
+//SEARCH METHODS
+app.get('/searchTicketsToAirport', (req, res) => {
+  //const toDate = req.query.toDate;
+  const depAirport = req.query.depAirport;
+
+
+  let dataResults;
+  pool.query(`SELECT * FROM Tickets JOIN Flight ON Tickets.flight_number=Flight.flight_number JOIN Airport ON Flight.destination_airport=Airport.airport_code WHERE Airport.airport_code=$1;`,[depAirport],
+   (err, response) => {
+      if (err) {
+          console.log("Error - Failed to complete query");
+          console.log(err);
+      }
+      else{
+        console.log("req1");
+        dataResults = response.rows;
+        console.log(dataResults);
+        res.json(dataResults);
+          
+      }
+    });
+    
+});
+
+app.get('/searchCustomerSchedule', (req, res) => {
+  //const toDate = req.query.toDate;
+  const first_name = req.query.first_name;
+  const last_name = req.query.last_name;
+
+  let dataResults;
+  pool.query(`SELECT * FROM Schedule JOIN Customers ON Schedule.cust_id=Customers.customer_id WHERE Customers.first_name=$1 AND Customers.last_name=$2;`,[first_name, last_name],
+   (err, response) => {
+      if (err) {
+          console.log("Error - Failed to complete query");
+          console.log(err);
+      }
+      else{
+        console.log("req1");
+        dataResults = response.rows;
+        console.log(dataResults);
+        res.json(dataResults);
+          
+      }
+    });
+    
+});
 
 
 // All other GET requests not handled before will return our React app
