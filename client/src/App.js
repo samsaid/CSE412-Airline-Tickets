@@ -105,6 +105,22 @@ const searchTicketsToAirport = event => {
 
 }
 */
+//TICKETS GOING TO
+const [searchStateAirportResults, setSearchStateAirportResults] = React.useState([]);
+
+const searchStateAirport = event => {
+  event.preventDefault();
+  setSubmitting(true);
+
+  setTimeout(() => {
+    setSubmitting(false);
+  }, 3000)
+  
+  fetch('/searchStateAirport?&state='+formData.state)
+      .then((res) => res.json())
+      .then((searchStateAirportResults) => setSearchStateAirportResults(searchStateAirportResults))
+      .then(console.log(searchStateAirportResults));
+}
 
 //TICKETS GOING TO
   const [searchTicketsGoingToResults, setSearchTicketsGoingToResults] = React.useState([]);
@@ -607,8 +623,63 @@ const searchCustomerSchedule = event => {
 
 
         <TabPanel>
-          5th component
+           <h3>Search Airports located in a State</h3>
+           <p>SQL Query: SELECT Distinct airport_name FROM Airport WHERE state='user input';</p>
+          <form class="form-inline" onSubmit={searchStateAirport}> 
+      <fieldset class="form-inline">
+         <label>
+         <p>Select a State</p>
+           <select name="state" onChange={handleChange}>
+	<option value="AZ">Arizona</option>
+	<option value="CA">California</option>
+	<option value="CO">Colorado</option>
+	<option value="GA">Georgia</option>
+	<option value="HI">Hawaii</option>
+	<option value="IL">Illinois</option>
+	<option value="MD">Maryland</option>
+	<option value="MN">Minnesota</option>
+	<option value="MS">Mississippi</option>
+	<option value="MO">Missouri</option>
+	<option value="NY">New York</option>
+	<option value="OR">Oregon</option>
+	<option value="TX">Texas</option>
+	<option value="WA">Washington</option>
+           </select>
+         </label>
+        </fieldset>
+       <button type="submit">Search Airports</button>
+       
+      </form>
+
+      <br/>
+        {!searchStateAirportResults ? <p>No airports found in that state. Please try different value.</p> :
+        <div>
+        <table class="center">
+        <thead>
+          <tr>
+            <th>Airport Code</th>
+            <th>Airport Name</th>
+            <th>City</th>
+            <th>State</th>
+            <th>US</th>
+          </tr>
+        </thead>
+        <tbody>{searchStateAirportResults.map(item => {
+      return (
+        <tr>
+          <td>{ item.airport_code}</td>
+          <td>{ item.airport_name}</td>
+          <td>{ item.city}</td>
+          <td>{ item.state}</td>
+          <td>{ item.country}</td>
+        </tr>
+      );
+        })}
+        </tbody>
+        </table>
+        </div>}
         </TabPanel>
+
 
 
         </Tabs>
