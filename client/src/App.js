@@ -314,13 +314,13 @@ const searchCustomerSchedule = event => {
           <Tab>View All Tables</Tab>
           <Tab>Search Flights</Tab>
           <Tab>Search Tickets</Tab>
-          <Tab>Search People</Tab>
+          <Tab>Search Customers</Tab>
           <Tab>Search Airports</Tab>
           </TabList>
           
           <TabPanel>
             <h3>View All Tables</h3>
-            <p>SQL Query: SELECT * FROM Table</p>
+            <p>SQL Query: SELECT * FROM [Flights/Airport/Customers/Schedule/Tickets]</p>
             <Tabs>
             <TabList>
               <Tab>Flights</Tab>
@@ -429,7 +429,8 @@ const searchCustomerSchedule = event => {
 
          <form class="form-inline" onSubmit={searchFlights}>
       <fieldset class="form-inline">
-        <legend>Travel Information:</legend>
+        <legend>Enter Travel Information:</legend>
+        <p>Use data from Flights table. For example, try: PHX to DEN on 1/7/2022</p>
          <label>
            <p>From</p>
            <input type="date" name="fromDate" min="2022-01-01" max="2025-21-01" onChange={handleChange}/>
@@ -596,13 +597,14 @@ const searchCustomerSchedule = event => {
           <form class="form-inline" onSubmit={searchCustomerSchedule}> 
       <fieldset class="form-ineline">
          <label>
-         <p><b>Enter a Customer's Name</b></p> <p>Names from Customers Table must be used. For Example, (Eugene Sullivan, Brian Bryant) </p>
+         <p><b>Enter a Customer's Name</b></p> <p>Use data from Customers table. For example, try: 'Eugene Sullivan' or 'Brian Bryant'. </p>
+         <p>**Note: In the results, 2 tickets = round trip, 1 ticket = one way trip.</p>
          <label>
-    First Name:
+    <b>First Name:  </b>
     <input type="text" name="first_name" onChange={handleChange}/>
   </label> <p></p>
   <label>
-    Last Name:
+    <b>Last Name:  </b>
     <input type="text" name="last_name" onChange={handleChange}/>
   </label>
          </label>
@@ -630,7 +632,6 @@ const searchCustomerSchedule = event => {
           <td>{ item.schedule_id}</td>
           <td>{ item.ticket_id}</td>
           <td>{ item.flight_number}</td>
-          <td>{ item.cust_id}</td>
           <td>{ item.customer_id}</td>
           <td>{ item.first_name}</td>
           <td>{ item.last_name}</td>
@@ -645,7 +646,7 @@ const searchCustomerSchedule = event => {
 
         <TabPanel>
            <h3>Search Airports located in a State</h3>
-           <p>SQL Query: SELECT Distinct airport_name FROM Airport WHERE state='user input';</p>
+           <p>SQL Query: SELECT * FROM Airport WHERE state='user input';</p>
           <form class="form-inline" onSubmit={searchStateAirport}> 
       <fieldset class="form-inline">
          <label>
