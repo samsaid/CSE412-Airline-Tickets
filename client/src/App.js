@@ -498,9 +498,9 @@ const searchCustomerSchedule = event => {
             <th>Departure Time</th>
             <th>Arrival Date</th>
             <th>Arrival Time</th>
-            <th>Seats Left </th>
+            {/*<th>Seats Left </th>*/}
             <th>Price</th>
-            <th>Purchase Ticket</th>
+            {/*<th>Purchase Ticket</th>*/}
           </tr>
         </thead>
         <tbody> {searchFlightResults.map(item => {
@@ -512,9 +512,9 @@ const searchCustomerSchedule = event => {
           <td>{ item.dep_time}</td>
           <td>{ dateFormat(item.arr_date, "fullDate")}</td>
           <td>{ item.arr_time}</td>
-          <td> { 25-item.flight_capacity}</td>
+          {/*<td> { 25-item.flight_capacity}</td>*/}
           <td>${ item.price_usd }</td>
-          <td>{purchaseTicket(25-item.flight_capacity)}</td>
+          {/*<td>{purchaseTicket(25-item.flight_capacity)}</td>*/}
         </tr>
       );
         })}</tbody>
