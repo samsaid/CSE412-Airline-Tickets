@@ -4,6 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import './App.css';
 import 'react-tabs/style/react-tabs.css';
+import dateFormat from "dateformat";
 
 
 const formReducer = (state, event) => {
@@ -171,7 +172,7 @@ const searchCustomerSchedule = event => {
     fetch('/searchFlights?fromDate='+formData.fromDate+'&depAirport='+formData.depAirport+'&arrAirport='+formData.arrAirport)
         .then((res) => res.json())
         .then((searchFlightResults) => setSearchFlightResults(searchFlightResults))
-        .then(console.log(searchFlightResults));
+        .then(console.log(searchFlightResults))
 
   }
 
@@ -181,6 +182,20 @@ const searchCustomerSchedule = event => {
       value: event.target.value,
     });
     console.log(formData);
+  }
+
+
+  function purchaseTicket(seatsLeft){
+    if(seatsLeft > 0){
+      return(
+        <button class="purchaseButton" id="purchaseButton">Purchase Ticket</button>
+      );
+    }
+    else{
+      return(
+        <button disabled class="purchaseButton">Purchase Ticket</button>
+      );
+    }
   }
 
   let airportsToRender;
@@ -199,6 +214,7 @@ const searchCustomerSchedule = event => {
 
   let flightsToRender;
   if (flights) {
+    flightsToRender = [];
     flightsToRender = flights.map(item => {
       return (
         <tr>
@@ -212,9 +228,9 @@ const searchCustomerSchedule = event => {
           <td>{ item.destination_city}</td>
           <td>{ item.destination_state}</td>
           <td>{ item.destination_country}</td>
-          <td>{ item.dep_date}</td>
+          <td>{ dateFormat(item.dep_date, "fullDate")}</td>
           <td>{ item.dep_time}</td>
-          <td>{ item.arr_date}</td>
+          <td>{ dateFormat(item.arr_date, "fullDate")}</td>
           <td>{ item.arr_time}</td>
           <td>{ item.flight_capacity}</td>
           <td>{ item.state }</td>
@@ -246,7 +262,7 @@ const searchCustomerSchedule = event => {
         <tr key={item.ticket_id}>
           <td>{ item.ticket_id }</td>
           <td>{ item.flight_number}</td>
-          <td>{ item.price_usd}</td>
+          <td>${ item.price_usd}</td>
         </tr>
       );
     });
@@ -270,7 +286,7 @@ const searchCustomerSchedule = event => {
   return (
 
     <div className="App">
-
+      
       <div class="cap">
         {/*
       <div style={{ fontFamily: "Circular,Arial,sans-serif", fontWeight:700, color: 'black', textAlign: 'left', fontSize: 50 }}>Flight Booking Simulator</div>
@@ -290,7 +306,6 @@ const searchCustomerSchedule = event => {
           */
         }
         <div class="container">
-
         <h2>Flight Bookings - Group 25</h2>
         <h5>Anjali Singh, Christine Pascua, Kaitlyn Allen, Samira Said</h5>
       <Paper square>
@@ -422,7 +437,7 @@ const searchCustomerSchedule = event => {
          </label>
          <label>
            <p>Leaving</p>
-           <select name="depAirport" onChange={handleChange}>
+           <select name="depAirport" onChange={handleChange} required>
              <option value="">--Please select an Airport--</option>
              <option value="ATL">ATL - Hartsfield-Jackson Atlanta International</option>
              <option value="AUS">AUS - Austin-Bergstrom International</option>
@@ -445,7 +460,7 @@ const searchCustomerSchedule = event => {
          </label>
          <label>
            <p>Headed To</p>
-           <select name="arrAirport" onChange={handleChange}>
+           <select name="arrAirport" onChange={handleChange} required>
             <option value="">--Please choose an option--</option>
              <option value="ATL">ATL - Hartsfield-Jackson Atlanta International</option>
              <option value="AUS">AUS - Austin-Bergstrom International</option>
@@ -480,10 +495,13 @@ const searchCustomerSchedule = event => {
           <tr>
             <th>Airline</th>
             <th>Trip</th>
+            <th>Departure Date</th>
             <th>Departure Time</th>
             <th>Arrival Date</th>
             <th>Arrival Time</th>
+            <th>Seats Left </th>
             <th>Price</th>
+            <th>Purchase Ticket</th>
           </tr>
         </thead>
         <tbody> {searchFlightResults.map(item => {
@@ -491,10 +509,13 @@ const searchCustomerSchedule = event => {
         <tr>
           <td>{ item.airline}</td>
           <td><strong>{ item.origin_airport}</strong> to <strong>{ item.destination_airport}</strong> </td>
+          <td>{ dateFormat(item.dep_date, "fullDate")}</td>
           <td>{ item.dep_time}</td>
-          <td>{ item.arr_date}</td>
+          <td>{ dateFormat(item.arr_date, "fullDate")}</td>
           <td>{ item.arr_time}</td>
+          <td> { 25-item.flight_capacity}</td>
           <td>${ item.price_usd }</td>
+          <td>{purchaseTicket(25-item.flight_capacity)}</td>
         </tr>
       );
         })}</tbody>
@@ -688,8 +709,12 @@ const searchCustomerSchedule = event => {
       </Paper>
         
         </div>
+        <br/>
+        <footer>
+          <p>Thank you for visitng our site! See our <a href="https://github.com/samsaid/CSE412-Airline-Tickets" target="_blank">Github Repo</a></p> 
+        </footer>
       </div>
-
+        
     </div>
   );
 }
