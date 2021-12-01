@@ -197,7 +197,27 @@ app.get('/searchTicketsToAirport', (req, res) => {
     });
     
 });
+app.get('/searchStateAirport', (req, res) => {
+  //const toDate = req.query.toDate;
+  const state = req.query.state;
 
+  let dataResults;
+  pool.query(`SELECT * FROM Airport WHERE state=$1;`,[state],
+   (err, response) => {
+      if (err) {
+          console.log("Error - Failed to complete query");
+          console.log(err);
+      }
+      else{
+        console.log("req1");
+        dataResults = response.rows;
+        console.log(dataResults);
+        res.json(dataResults);
+          
+      }
+    });
+    
+});
 app.get('/searchCustomerSchedule', (req, res) => {
   //const toDate = req.query.toDate;
   const first_name = req.query.first_name;
