@@ -291,7 +291,7 @@ const searchCustomerSchedule = event => {
           <td>{ dateFormat(item.arr_date, "fullDate")}</td>
           <td>{ item.arr_time}</td>
           <td>{item.flight_capacity}</td>
-          <td>{ item.state }</td>
+          <td>{ !item.seats_left ? 25 : item.seats_left }</td>
         </tr>
       );
     });
@@ -426,6 +426,7 @@ const searchCustomerSchedule = event => {
           <th>Arrival Date</th>
           <th>Arrival Time</th>
           <th>Flight Capacity</th>
+          <th>Seats Left</th>
         </tr>
       </thead>
       <tbody>{flightsToRender}</tbody>
@@ -589,7 +590,7 @@ const searchCustomerSchedule = event => {
           <td>{ item.dep_time}</td>
           <td>{ dateFormat(item.arr_date, "fullDate")}</td>
           <td>{ item.arr_time}</td>
-          <td> { item.flight_capacity}</td>
+          <td> { !item.seats_left ? 25 : item.seats_left}</td>
           <td>${ item.price_usd }</td>
           <td>{purchaseTicket(item.flight_capacity, item.airline, item.flight_number, item.dep_date,
             item.dep_time, item.arr_date, item.arr_time, item.price_usd, item.flight_capacity)}</td>

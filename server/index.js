@@ -277,7 +277,7 @@ app.get('/purchaseTickets', (req,res) => {
   console.log("Flight # = " + flight_number);
   console.log("Flight $ = " + flight_price);
 
-  pool.query(`UPDATE Flight SET flight_capacity=flight_capacity-1 WHERE flight_number=$1;`,[flight_number],
+  pool.query(`UPDATE Flight SET seats_left=seats_left-1 WHERE flight_number=$1;`,[flight_number],
    (err, response) => {
       if (err) {
           console.log("Error - Failed to complete query - UPDATE FLIGHTS");
