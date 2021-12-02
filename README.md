@@ -20,7 +20,8 @@
 
             
 ## About the Project
-<img src="/images/logo.png" alt="logo" width="200"/>
+![landing page](/images/logo.png)
+
 flyts is a mock online flight booking search service inspired by Google Flights, with emphasis on the database.  
 
 This repository contains the full stack web application and is connected to an external PostgresSQL database server. The purpose of this project is to demonstrate an understanding of a relational database management system for CSE 412: Database Management at Arizona State Univerity. 
