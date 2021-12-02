@@ -17,13 +17,9 @@
     - [2.2. Development Environment](#development-environment)  
         - [2.2.1. Push Changes to Github](#push-changes-to-github)
         - [2.2.2. Push Changes to Heroku Application](#push-changes-to-heroku-application)
-
-            
+ 
 ## About the Project
-<p align="center" >
-    <img src="/images/logo.png" alt="logo" width="400"/> 
-</p>
-
+<p align="center" ><img src="/images/logo.png" alt="logo" width="250"/> </p>
 flyts is a mock online flight booking search service inspired by Google Flights, with emphasis on the database.  
 
 This repository contains the full stack web application and is connected to an external PostgresSQL database server. The purpose of this project is to demonstrate an understanding of a relational database management system for CSE 412: Database Management at Arizona State Univerity. 
