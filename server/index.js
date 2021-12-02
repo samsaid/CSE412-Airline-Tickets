@@ -4,6 +4,7 @@ const path = require('path');
 const express = require("express");
 const PORT = process.env.PORT || 3001;
 const {Pool} = require('pg');
+const { isBuffer, callbackify } = require('util');
 const pool = new Pool({
  connectionString: 'postgres://evzknmwaoazpmy:649ea57a0bc5060870c6e7c40ae05afa8794492aa58ec482eb168aa4d9c1f888@ec2-34-224-239-147.compute-1.amazonaws.com:5432/dbukho2ionepct',
  ssl: {
@@ -197,6 +198,28 @@ app.get('/searchTicketsToAirport', (req, res) => {
     });
     
 });
+
+app.get('/seatsLeft', (req, res) => {
+  const flight_number = req.query.flight_number;
+
+  let dataResults;
+  pool.query('SELECT 25-COUNT(*) AS count FROM Schedule WHERE flight_number=$1', [flight_number],
+  (err, response) => {
+    if (err) {
+      console.log("Error - Failed to complete query SEAT COUNT");
+      console.log(err);
+  }
+  else{
+    dataResults = response.rows[0].count;
+    console.log("seat count => " +dataResults);
+    res.json(dataResults);
+    return dataResults;
+      
+  }
+
+  });
+});
+
 app.get('/searchStateAirport', (req, res) => {
   //const toDate = req.query.toDate;
   const state = req.query.state;
@@ -239,6 +262,149 @@ app.get('/searchCustomerSchedule', (req, res) => {
       }
     });
     
+});
+
+app.get('/purchaseTickets', (req,res) => {
+  const first_name = req.query.first_name;
+  const last_name = req.query.last_name;
+  const dob = req.query.dob;
+  const flight_number = req.query.flight_number;
+  const flight_price = req.query.flight_price;
+
+  console.log("First Name = " + first_name);
+  console.log("Last Name = " + last_name);
+  console.log("DOB = " + dob);
+  console.log("Flight # = " + flight_number);
+  console.log("Flight $ = " + flight_price);
+
+  pool.query(`UPDATE Flight SET flight_capacity=flight_capacity-1 WHERE flight_number=$1;`,[flight_number],
+   (err, response) => {
+      if (err) {
+          console.log("Error - Failed to complete query - UPDATE FLIGHTS");
+          console.log(err);
+          return;
+      }
+      else{
+        console.log("UPDATE FLIGHTS");
+        dataResults = response;
+        console.log(dataResults);
+        res.json(dataResults);
+          
+      }
+    });
+
+  pool.query(`INSERT INTO Customers (customer_id, first_name, last_name, dob) VALUES ((SELECT MAX(customer_id) FROM Customers)+1, $1, $2, $3)`,[first_name, last_name, dob],
+   (err, response) => {
+      if (err) {
+          console.log("Error - Failed to complete query - INSERT CUSTOMER");
+          console.log(err);
+          return;
+      }
+      else{
+        console.log("INSERT CUSTOMER");
+        //dataResults = response;
+        //console.log(dataResults);
+        //res.json(dataResults);
+          
+      }
+    });
+
+    //not inserting anything into tickets because I have all of the tickets avaliable
+    /*pool.query(`INSERT INTO Tickets (ticket_id, flight_number, price_usd) VALUES ((SELECT MAX(ticket_id)+1 FROM Tickets), $1, $2);`,[flight_number, flight_price],
+   (err, response) => {
+      if (err) {
+          console.log("Error - Failed to complete query - INSERT TICKETS");
+          console.log(err);
+          return;
+      }
+      else{
+        console.log("INSERT TICKET");
+        ///dataResults = response;
+        //console.log(dataResults);
+        //res.json(dataResults);
+          
+      }
+    });*/
+
+
+    pool.query(`INSERT INTO Schedule (schedule_id, ticket_id, flight_number, cust_id) 
+    VALUES ((SELECT MAX(schedule_id)+1 FROM Schedule), 
+    (SELECT MIN(Tickets.ticket_id) FROM Tickets LEFT JOIN Schedule ON Tickets.ticket_id=Schedule.ticket_id WHERE Tickets.flight_number=$1 and schedule_id is null), 
+    $1, (SELECT customer_id FROM Customers WHERE first_name=$2 AND last_name=$3 AND dob=$4)) 
+    ON CONFLICT (ticket_id) DO NOTHING;`,[flight_number, first_name, last_name, dob],
+   (err, response) => {
+      if (err) {
+          console.log("Error - Failed to complete query - INSERT SCHEDULE");
+          console.log(err);
+          return;
+      }
+      else{
+        console.log("INSERT SCHEDULE");
+        //dataResults = response;
+        //console.log(dataResults);
+        //res.json(dataResults);
+          
+      }
+    });
+
+    /*pool.getConnection(function (err, conn){
+      if(err) return callback(err);
+      
+      conn.query(`UPDATE Flight SET flight_capacity= flight_capacity-1 WHERE flight_number=$1`,[flight_number],
+      (err, response) => {
+        if (err) {
+          throw err;
+        }
+        else{
+          console.log("UPDATE FLIGHTS");
+          dataResults = response;
+          console.log(dataResults);
+          res.json(dataResults);
+
+          conn.query(`INSERT INTO Customers (customer_id, first_name, last_name, dob) VALUES ((SELECT MAX(customer_id)+1 FROM Customers), $1, $2, $3) ON CONFLICT (customer_id) DO NOTHING`,[first_name, last_name, dob],
+          (err, response) => {
+            if (err) {
+              throw err;
+            }
+            else{
+              console.log("INSERT CUSTOMER");
+              dataResults = response;
+              console.log(dataResults);
+              res.json(dataResults);
+
+              conn.query(`INSERT INTO Tickets (ticket_id, flight_number, price_usd) VALUES ((SELECT MAX(ticket_id)+1 FROM Tickets), $1, $2) ON CONFLICT (ticket_id) DO NOTHING`,[flight_number, flight_price],
+              (err, response) => {
+                if (err) {
+                  throw err;
+                }
+                else{
+                  console.log("INSERT TICKET");
+                  dataResults = response;
+                  console.log(dataResults);
+                  res.json(dataResults);
+
+                  conn.query(`INSERT INTO Schedule (schedule_id, ticket_id, flight_number, cust_id) VALUES ((SELECT MAX(schedule_id)+1 FROM Schedule GROUP BY schedule_id), (SELECT ticket_id FROM Tickets WHERE flight_number=$1 and price_usd=$2), $1, (SELECT customer_id FROM Customers WHERE first_name=$3 AND last_name=$4 AND dob=$5)) ON CONFLICT (ticket_id) DO NOTHING`,[flight_number, flight_price, first_name, last_name, dob],
+                  (err, response) => {
+                    if (err) {
+                      throw err;
+                    }
+                    else{
+                      console.log("INSERT SCHEDULE");
+                      dataResults = response;
+                      console.log(dataResults);
+                      res.json(dataResults);
+                    }
+                  });
+          
+                }
+              });
+            }
+          });
+        }
+      });
+    });*/
+
+
 });
 
 

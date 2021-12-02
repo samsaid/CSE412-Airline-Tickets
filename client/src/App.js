@@ -13,7 +13,9 @@ const formReducer = (state, event) => {
     [event.name]: event.value
   }
  }
-
+ var flight_number_purchase; 
+ var flight_capacity_purchase;
+ var flight_price_purchased;
 
 
 function App() {
@@ -172,8 +174,7 @@ const searchCustomerSchedule = event => {
     fetch('/searchFlights?fromDate='+formData.fromDate+'&depAirport='+formData.depAirport+'&arrAirport='+formData.arrAirport)
         .then((res) => res.json())
         .then((searchFlightResults) => setSearchFlightResults(searchFlightResults))
-        .then(console.log(searchFlightResults))
-
+        .then(console.log(searchFlightResults));
   }
 
   const handleChange = event => {
@@ -184,19 +185,76 @@ const searchCustomerSchedule = event => {
     console.log(formData);
   }
 
+  const [seatCount, setSeatCount] = React.useState();
+  let seats;
+  function getSeats(flightNum){
+    seats = 0;
+    fetch('/seatsLeft?&flight_number='+flightNum)
+          .then((res) => res.json())
+          .then((seatCount) => setSeatCount(seatCount));
 
-  function purchaseTicket(seatsLeft){
+    //  seats = seatCount.map(item => {
+    //    return(
+    //    <p>{item.count}</p>
+    //    );
+    //   });
+    console.log("SeatCount:" +seatCount);
+    //seats = seatCount;
+    //return seats;
+      // return (
+      //   <div>
+      //     <p>{seatCount}</p>
+      //   </div>
+      // );
+  }
+
+  
+  function showPurchaseModal(airline, flight_number, dep_date, dep_time, arr_date, arr_time, price_usd, flight_capacity){
+    document.getElementById("id01").style.display="block";
+    document.getElementById("flightInfo").innerHTML = flight_number;
+    document.getElementById("airlineInfo").innerHTML = airline;
+    document.getElementById("fromInfo").innerHTML = formData.depAirport;
+    document.getElementById("depInfo").innerHTML = dateFormat(dep_date, "fullDate");
+    document.getElementById("arrInfo").innerHTML = dateFormat(arr_date, "fullDate");
+    document.getElementById("depTime").innerHTML = dep_time;
+    document.getElementById("arrTime").innerHTML = arr_time;
+    document.getElementById("toInfo").innerHTML = formData.arrAirport;
+    document.getElementById("priceInfo").innerHTML = "$"+price_usd;
+    flight_number_purchase = flight_number;
+    flight_capacity_purchase = flight_capacity;
+    flight_price_purchased = price_usd;
+    console.log("1stFlight # = " + flight_number_purchase);
+  console.log("1stFlight $ = " + flight_price_purchased);
+  }
+
+
+  const [submitPurchaseResults, setSubmitPurchaseResults] = React.useState();
+  function submitPurchase(){
+    console.log("2ndFlight # = " + flight_number_purchase);
+  console.log("2ndFlight $ = " + flight_price_purchased);
+    fetch('/purchaseTickets?&first_name='+formData.first_namePurchaser+'&last_name='+formData.last_namePurchaser+
+    '&dob='+formData.dob_Purchaser+"&flight_number="+flight_number_purchase+"&flight_capacity="+flight_capacity_purchase+
+    "&flight_price="+flight_price_purchased)
+      .then((res) => res.json())
+      .then((submitPurchaseResults) => setSubmitPurchaseResults(submitPurchaseResults))
+      .then(console.log(submitPurchaseResults));
+
+  }
+
+  function purchaseTicket(seatsLeft, airline, flight_number, dep_date, dep_time, arr_date, arr_time, price_usd, flight_capacity){
     if(seatsLeft > 0){
-      return(
-        <button class="purchaseButton" id="purchaseButton">Purchase Ticket</button>
-      );
+      return(<button class="purchaseButton" id="purchaseButton" onClick={showPurchaseModal.bind(this,airline, flight_number, dep_date, dep_time, arr_date, arr_time, price_usd, flight_capacity)}>Purchase Ticket</button>);
     }
     else{
-      return(
-        <button disabled class="purchaseButton">Purchase Ticket</button>
-      );
+      return(<button disabled class="purchaseButton">Purchase Ticket</button>);
     }
   }
+
+  function closeModal(){
+    document.getElementById("id01").style.display="none";
+  }
+
+ 
 
   let airportsToRender;
   if (airports) {
@@ -232,7 +290,7 @@ const searchCustomerSchedule = event => {
           <td>{ item.dep_time}</td>
           <td>{ dateFormat(item.arr_date, "fullDate")}</td>
           <td>{ item.arr_time}</td>
-          <td>{ item.flight_capacity}</td>
+          <td>{item.flight_capacity}</td>
           <td>{ item.state }</td>
         </tr>
       );
@@ -287,25 +345,43 @@ const searchCustomerSchedule = event => {
 
     <div className="App">
       
-      <div class="cap">
-        {/*
-      <div style={{ fontFamily: "Circular,Arial,sans-serif", fontWeight:700, color: 'black', textAlign: 'left', fontSize: 50 }}>Flight Booking Simulator</div>
-      */
-        }
-
-      </div>
-
       <div style={{ height: 800, fontSize: 20, backgroundColor: 'white' }}>
 
+        <div className="container">
+          {/*Purchase Ticket Modal*/}
+          <div id="id01" className="modal" style={{display:'none'}}>
+            <span onClick={closeModal} className="close" title="Close Modal">&times;</span>
+            <form className="modal-content" onSubmit={submitPurchase}>
+              <div className="container">
+                <h1>Purchase Ticket</h1>
+                <h2>Flight Information</h2>
+                <strong>Flight #: </strong><p id="flightInfo" name="flightNumber">blah</p>
+                <strong>Airline: </strong><p id="airlineInfo">blah</p>
+                <strong>From: </strong><p id="fromInfo">blah</p>
+                <strong>To: </strong><p id="toInfo">blah</p>
+                <strong>Departure: </strong><p id="depInfo">blah</p><p id="depTime"></p>
+                <strong>Arrival: </strong><p id="arrInfo">blah</p><p id="arrTime"></p>
+                <strong>Cost: </strong><p id="priceInfo">$blah</p>
+                <label>
+                  <b>First Name:  </b>
+                  <input type="text" name="first_namePurchaser" onChange={handleChange} required/>
+                </label> <p></p>
+                <label>
+                  <b>Last Name:  </b>
+                  <input type="text" name="last_namePurchaser" onChange={handleChange} required/>
+                </label>
+                <label>
+                  <b>Date of Birth:  </b>
+                  <input type="date" name="dob_Purchaser" onChange={handleChange} required/>
+                </label>
+                <div class="clearfix">
+                  <button type="button" class="cancelbtn" onClick={closeModal}>Cancel</button>
+                  <button type="submit" class="deletebtn">Purchase Ticket</button>
+                </div>
+              </div>
+            </form>
+          </div>
 
-        {/*
-          <img
-            src="https://www.pngkey.com/png/full/14-144708_vector-transparent-download-airplane-vacation-clipart-globe-with.png" align="left" width=" 234 " height="199.8 "
-
-          />
-          */
-        }
-        <div class="container">
         <h2>Flight Bookings - Group 25</h2>
         <h5>Anjali Singh, Christine Pascua, Kaitlyn Allen, Samira Said</h5>
       <Paper square>
@@ -320,7 +396,7 @@ const searchCustomerSchedule = event => {
           
           <TabPanel>
             <h3>View All Tables</h3>
-            <p>SQL Query: SELECT * FROM [Flights/Airport/Customers/Schedule/Tickets]</p>
+            <p>SQL Query: <code>SELECT * FROM [Flights/Airport/Customers/Schedule/Tickets]</code></p>
             <Tabs>
             <TabList>
               <Tab>Flights</Tab>
@@ -425,7 +501,7 @@ const searchCustomerSchedule = event => {
 
         <TabPanel>
           <h3>Search Flights</h3>
-          <p>SQL Query: SELECT DISTINCT Flight.*, Tickets.price_usd FROM Flight LEFT JOIN Tickets ON Tickets.flight_number=flight.flight_number WHERE dep_date='user input' AND origin_airport='user input' AND destination_airport='user input';</p>
+          <p>SQL Query: <code>SELECT DISTINCT Flight.*, Tickets.price_usd FROM Flight LEFT JOIN Tickets ON Tickets.flight_number=flight.flight_number WHERE dep_date='user input' AND origin_airport='user input' AND destination_airport='user input';</code></p>
 
          <form class="form-inline" onSubmit={searchFlights}>
       <fieldset class="form-inline">
@@ -488,7 +564,7 @@ const searchCustomerSchedule = event => {
       </form>
 
       <br/>
-        {searchFlightResults.length==0 ? <h3>Sorry we don't have any flights avaliable for the information you selected. <br/>Please alter your search criteria.</h3>  :
+        {searchFlightResults.length===0 ? <h3>Sorry we don't have any flights avaliable for the information you selected. <br/>Please alter your search criteria.</h3>  :
         <div>
         <table class="center">
         <thead>
@@ -499,9 +575,9 @@ const searchCustomerSchedule = event => {
             <th>Departure Time</th>
             <th>Arrival Date</th>
             <th>Arrival Time</th>
-            {/*<th>Seats Left </th>*/}
+            <th>Seats Left </th>
             <th>Price</th>
-            {/*<th>Purchase Ticket</th>*/}
+            <th>Purchase Ticket</th>
           </tr>
         </thead>
         <tbody> {searchFlightResults.map(item => {
@@ -513,12 +589,12 @@ const searchCustomerSchedule = event => {
           <td>{ item.dep_time}</td>
           <td>{ dateFormat(item.arr_date, "fullDate")}</td>
           <td>{ item.arr_time}</td>
-          {/*<td> { 25-item.flight_capacity}</td>*/}
+          <td> { item.flight_capacity}</td>
           <td>${ item.price_usd }</td>
-          {/*<td>{purchaseTicket(25-item.flight_capacity)}</td>*/}
+          <td>{purchaseTicket(item.flight_capacity, item.airline, item.flight_number, item.dep_date,
+            item.dep_time, item.arr_date, item.arr_time, item.price_usd, item.flight_capacity)}</td>
         </tr>
-      );
-        })}</tbody>
+      );})}</tbody>
         </table>
         </div>}
         </TabPanel>
@@ -526,7 +602,7 @@ const searchCustomerSchedule = event => {
 
         <TabPanel>
            <h3>Search Tickets Arriving At an Airport</h3>
-           <p>SQL Query: SELECT * FROM Tickets JOIN Flight ON Tickets.flight_number = Flight.flight_number JOIN Airport ON Flight.destination_airport=Airport.airport_code WHERE Airport.airport_code='user input'</p>
+           <p>SQL Query: <code>SELECT * FROM Tickets JOIN Flight ON Tickets.flight_number = Flight.flight_number JOIN Airport ON Flight.destination_airport=Airport.airport_code WHERE Airport.airport_code='user input'</code></p>
           <form class="form-inline" onSubmit={searchTicketsGoingTo}> 
       <fieldset class="form-inline">
          <label>
@@ -583,9 +659,7 @@ const searchCustomerSchedule = event => {
           <td>{ item.flight_number}</td>
           <td>${ item.price_usd }</td>
         </tr>
-      );
-        })}
-        </tbody>
+      );})}</tbody>
         </table>
         </div>}
         </TabPanel>
@@ -593,7 +667,7 @@ const searchCustomerSchedule = event => {
 
         <TabPanel>
         <h3>Search a Customer's Schedule</h3> 
-        <p>SQL Query: SELECT * FROM Schedule JOIN Customers ON Schedule.cust_id=Customers.customer_id WHERE Customers.first_name='user input' AND Customers.last_name='user input';</p>
+        <p>SQL Query: <code>SELECT * FROM Schedule JOIN Customers ON Schedule.cust_id=Customers.customer_id WHERE Customers.first_name='user input' AND Customers.last_name='user input';</code></p>
           <form class="form-inline" onSubmit={searchCustomerSchedule}> 
       <fieldset class="form-ineline">
          <label>
@@ -636,9 +710,7 @@ const searchCustomerSchedule = event => {
           <td>{ item.first_name}</td>
           <td>{ item.last_name}</td>
         </tr>
-      );
-        })}
-        </tbody>
+      );})}</tbody>
         </table>
         </div>}
         </TabPanel>
@@ -646,7 +718,7 @@ const searchCustomerSchedule = event => {
 
         <TabPanel>
            <h3>Search Airports located in a State</h3>
-           <p>SQL Query: SELECT * FROM Airport WHERE state='user input';</p>
+           <p>SQL Query: <code>SELECT * FROM Airport WHERE state='user input';</code></p>
           <form class="form-inline" onSubmit={searchStateAirport}> 
       <fieldset class="form-inline">
          <label>
@@ -695,9 +767,7 @@ const searchCustomerSchedule = event => {
           <td>{ item.state}</td>
           <td>{ item.country}</td>
         </tr>
-      );
-        })}
-        </tbody>
+      );})}</tbody>
         </table>
         </div>}
         </TabPanel>
