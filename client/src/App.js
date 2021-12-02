@@ -123,6 +123,8 @@ const searchStateAirport = event => {
       .then((res) => res.json())
       .then((searchStateAirportResults) => setSearchStateAirportResults(searchStateAirportResults))
       .then(console.log(searchStateAirportResults));
+
+      //resetInputFields();
 }
 
 //TICKETS GOING TO
@@ -140,6 +142,8 @@ const searchStateAirport = event => {
         .then((res) => res.json())
         .then((searchTicketsGoingToResults) => setSearchTicketsGoingToResults(searchTicketsGoingToResults))
         .then(console.log(searchTicketsGoingToResults));
+    
+        //resetInputFields();
   }
 
 //SEARCH CUSTOMERS SCHEDULE
@@ -157,6 +161,8 @@ const searchCustomerSchedule = event => {
       .then((res) => res.json())
       .then((searchCustomerResults) => setSearchCustomerResults(searchCustomerResults))
       .then(console.log(searchCustomerResults));
+
+  //resetInputFields();
 }
 
 
@@ -171,10 +177,12 @@ const searchCustomerSchedule = event => {
       setSubmitting(false);
     }, 3000)
     
-    fetch('/searchFlights?fromDate='+formData.fromDate+'&depAirport='+formData.depAirport+'&arrAirport='+formData.arrAirport)
+    fetch('/searchFlights?&fromDate='+formData.fromDate+'&depAirport='+formData.depAirport+'&arrAirport='+formData.arrAirport)
         .then((res) => res.json())
         .then((searchFlightResults) => setSearchFlightResults(searchFlightResults))
         .then(console.log(searchFlightResults));
+
+    //resetInputFields();
   }
 
   const handleChange = event => {
@@ -185,28 +193,6 @@ const searchCustomerSchedule = event => {
     console.log(formData);
   }
 
-  const [seatCount, setSeatCount] = React.useState();
-  let seats;
-  function getSeats(flightNum){
-    seats = 0;
-    fetch('/seatsLeft?&flight_number='+flightNum)
-          .then((res) => res.json())
-          .then((seatCount) => setSeatCount(seatCount));
-
-    //  seats = seatCount.map(item => {
-    //    return(
-    //    <p>{item.count}</p>
-    //    );
-    //   });
-    console.log("SeatCount:" +seatCount);
-    //seats = seatCount;
-    //return seats;
-      // return (
-      //   <div>
-      //     <p>{seatCount}</p>
-      //   </div>
-      // );
-  }
 
   
   function showPurchaseModal(airline, flight_number, dep_date, dep_time, arr_date, arr_time, price_usd, flight_capacity){
@@ -238,6 +224,8 @@ const searchCustomerSchedule = event => {
       .then((res) => res.json())
       .then((submitPurchaseResults) => setSubmitPurchaseResults(submitPurchaseResults))
       .then(console.log(submitPurchaseResults));
+
+      //resetInputFields();
 
   }
 
@@ -291,7 +279,7 @@ const searchCustomerSchedule = event => {
           <td>{ dateFormat(item.arr_date, "fullDate")}</td>
           <td>{ item.arr_time}</td>
           <td>{item.flight_capacity}</td>
-          <td>{ !item.seats_left ? 25 : item.seats_left }</td>
+          <td>{ item.seats_left }</td>
         </tr>
       );
     });
@@ -590,7 +578,7 @@ const searchCustomerSchedule = event => {
           <td>{ item.dep_time}</td>
           <td>{ dateFormat(item.arr_date, "fullDate")}</td>
           <td>{ item.arr_time}</td>
-          <td> { !item.seats_left ? 25 : item.seats_left}</td>
+          <td> { item.seats_left}</td>
           <td>${ item.price_usd }</td>
           <td>{purchaseTicket(item.flight_capacity, item.airline, item.flight_number, item.dep_date,
             item.dep_time, item.arr_date, item.arr_time, item.price_usd, item.flight_capacity)}</td>

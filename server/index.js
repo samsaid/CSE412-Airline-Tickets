@@ -293,7 +293,7 @@ app.get('/purchaseTickets', (req,res) => {
       }
     });
 
-  pool.query(`INSERT INTO Customers (customer_id, first_name, last_name, dob) VALUES ((SELECT MAX(customer_id) FROM Customers)+1, $1, $2, $3)`,[first_name, last_name, dob],
+  pool.query(`INSERT INTO Customers (customer_id, first_name, last_name, dob) VALUES ((SELECT MAX(customer_id) FROM Customers)+1, $1, $2, $3);`,[first_name, last_name, dob],
    (err, response) => {
       if (err) {
           console.log("Error - Failed to complete query - INSERT CUSTOMER");
@@ -327,11 +327,7 @@ app.get('/purchaseTickets', (req,res) => {
     });*/
 
 
-    pool.query(`INSERT INTO Schedule (schedule_id, ticket_id, flight_number, cust_id) 
-    VALUES ((SELECT MAX(schedule_id)+1 FROM Schedule), 
-    (SELECT MIN(Tickets.ticket_id) FROM Tickets LEFT JOIN Schedule ON Tickets.ticket_id=Schedule.ticket_id WHERE Tickets.flight_number=$1 and schedule_id is null), 
-    $1, (SELECT customer_id FROM Customers WHERE first_name=$2 AND last_name=$3 AND dob=$4)) 
-    ON CONFLICT (ticket_id) DO NOTHING;`,[flight_number, first_name, last_name, dob],
+    pool.query(`INSERT INTO Schedule (schedule_id, ticket_id, flight_number, cust_id) VALUES ((SELECT MAX(schedule_id)+1 FROM Schedule),(SELECT MIN(Tickets.ticket_id) FROM Tickets LEFT JOIN Schedule ON Tickets.ticket_id=Schedule.ticket_id WHERE Tickets.flight_number=$1 and schedule_id is null), $1, (SELECT customer_id FROM Customers WHERE first_name=$2 AND last_name=$3 AND dob=$4)) ON CONFLICT (ticket_id) DO NOTHING;`,[flight_number, first_name, last_name, dob],
    (err, response) => {
       if (err) {
           console.log("Error - Failed to complete query - INSERT SCHEDULE");
