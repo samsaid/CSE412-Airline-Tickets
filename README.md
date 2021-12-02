@@ -1,47 +1,68 @@
 # CSE412-Airline-Tickets
 ## Table of Contents  
 - [1. About the Project](#about-the-project)
+- [2. User Manual] (#user-manual)
+
+
+
+
     - [1.1. Tools](#tools)
     - [1.2. Database Schema](#database-schema)
         - [1.2.1. ER Diagram](#er-diagram)
         - [1.2.2. ER-to-Relational](#er-to-relational)
     - [1.3. System Architechture](#system-architechture)
-- [2. Getting Started](#getting-started)
+
+- [3. Getting Started](#getting-started)
     - [2.1 Using the Application](#using-the-application)
     - [2.2. Development Environment](#development-environment)  
         - [2.2.1. Push Changes to Github](#push-changes-to-github)
-        - [2.2.2. Push Changes to Heroku Application](#push-changes-to-heroku-application)  
+        - [2.2.2. Push Changes to Heroku Application](#push-changes-to-heroku-application)
+
             
 ## About the Project
-This repository contains an application "Airline Tickets" which is a React/Node web application connected to a PostgresSQL database deployed via Heroku. The objective of this project is to demonstrate an understanding of a relational database management system. 
+<img src="/images/logo.png" alt="logo" width="200"/>
+flyts is a mock online flight booking search service inspired by Google Flights, with emphasis on the database.  
 
-The project was completed in three phases:      
+This repository contains the full stack web application and is connected to an external PostgresSQL database server. The purpose of this project is to demonstrate an understanding of a relational database management system for CSE 412: Database Management at Arizona State Univerity. 
 
-- Phase I included selecting a topic, researching development tools, and creating the project plan. By the end of this phase, we designed the database system using an ER diagram to visualize how the database components interact.     
-- Phase II included data collection, and creating the database on a PostgresSQL database server. During this phase, we've modified our original database design as we made progress on database implementation and considered the relationships of entities. By the end of Phase II, we used SQL to convert the ER Diagram to a relational database with tables and relationships and inserted the data with SQL into the database.  
+![landing page](/images/firstpage.png)
+
+
+![landing page](/images/tab1.png)
+![landing page](/images/tab2.png)
+![landing page](/images/tab3.png)
+
+### Timeline
+The project was completed during the Fall 2021 semester in three phases:  
+- Phase I - Selecting a topic, researching development tools, and creating the project plan. By the end of this phase, our team designed the database system using an ER diagram to visualize how the database components interact.     
+- Phase II - data collection, ER diagram modification, and creating the database. During this phase, the team updated the original database design as we collected data and reconsidered the relationships of entities. By the end of this phase, we used SQL DDL to convert the ER Diagram to a relational database with tables and relationships and inserted the data to the database.  
 - Phase III included setting up our team development environment and creating the application which can make queries to the database. 
 
-Screenshot of application welcome page:  
-![Screenshot of application welcome page](/images/app-screenshot1.png)
-  ![image](https://user-images.githubusercontent.com/29154819/143911991-b8f225c9-a360-4072-aef7-44e695b97cce.png)
-
-
-For a more in depth look at the application, see section [using the application](#using-the-application).
-
 ### Tools
+The following tools were used for the development of this project:
 - Visual Studio Code
 - React
 - Node.js
-- Heroku PostgresSQL Database
-- SQL
 - JavaScript
 - HTML/CSS
+- Heroku PostgresSQL Database
+- SQL
+
+### User Manual
+flytes is supported on all popular browsers, including Chrome, Firefox, Edge, and Internet Explorer 9 and above. Users can access the site via a preferred browser at www.flytes.com. Just kidding, users can access it at [cse-412.herokuapp.com](https://cse-412.herokuapp.com/).
+
+flytes is a single-page application with 2 main components. The outer tabs on the first row "View All Tables", "Search Flights", "Search Tickets", "Search Customers", and "Search Airports" control the contents of the inner tab. Upon opening the site link, users begin at the "View all Tabs" which contains 5 tabs, each displaying the full contents of their designated tables using the command, ''' SELECT * FROM''' [insert table name] on the backend. 
+
+View All Tabs:
+![landing page](/images/firstpage.png)
+
+
 ### Database Schema
 #### ER Diagram
-The database for this project is a relational database model contining 5 tables.  
+The database created for this project is a relational database model contining 5 entities. As the topic of this project is an online flight searching service, we designed the following entities which interact with each other: Flights, Airport, Customers, Tickets, Schedule.
 
-The following image contains a screenshot of the ER (Entity-Relationship) Diagram created for this project.
-![System Overview](/images/er-diagram.png)
+ER (Entity-Relationship) Diagram:
+![ER Diagram](/images/er-diagram.png)
 
 #### ER-to-Relational
 To create the database system in PostgresSQL, the ER Digram was transformed relational database model using the following SQL data definition language (DDL).  
@@ -106,18 +127,12 @@ CREATE TABLE Schedule(
     FOREIGN KEY (flight_number, ticket_id) REFERENCES Tickets(flight_number, ticket_id),
     FOREIGN KEY (cust_id) REFERENCES Customers(customer_id));
 ```
+### Database Server
+
 
 ### System Architechture
 System Overview of Application
 ![System Overview](/images/system-overview.png)
-
-## Getting Started  
-### Using the Application
-To access the live deployment of the application, click [here](https://cse-412.herokuapp.com/).  
-
-Below are screenshots of application demonstration.  
-Example - searching a flight and the displayed data results:
-![Screenshot of application query](/images/app-screenshot2.png)
 
 ### Development Enviornment
 The following steps are only necessary for the project developers or users who are looking to implement a version of the project. To view/acces the live version of the appplication, see section on [using the application](#using-the-application).
