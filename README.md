@@ -20,7 +20,9 @@
 
             
 ## About the Project
-![landing page](/images/logo.png)
+<p align="center" >
+    <img src="/images/logo.png" alt="logo" width="400"/> 
+</p>
 
 flyts is a mock online flight booking search service inspired by Google Flights, with emphasis on the database.  
 
