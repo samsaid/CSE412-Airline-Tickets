@@ -1,11 +1,9 @@
 # CSE412-Airline-Tickets
+<p align="center" ><img src="/images/logo.png" alt="logo" width="300"/> </p>
+
 ## Table of Contents  
 - [1. About the Project](#about-the-project)
 - [2. User Manual] (#user-manual)
-
-
-
-
     - [1.1. Tools](#tools)
     - [1.2. Database Schema](#database-schema)
         - [1.2.1. ER Diagram](#er-diagram)
@@ -19,23 +17,10 @@
         - [2.2.2. Push Changes to Heroku Application](#push-changes-to-heroku-application)
  
 ## About the Project
-<p align="center" ><img src="/images/logo.png" alt="logo" width="250"/> </p>
 flyts is a mock online flight booking search service inspired by Google Flights, with emphasis on the database.  
-
+  
+  
 This repository contains the full stack web application and is connected to an external PostgresSQL database server. The purpose of this project is to demonstrate an understanding of a relational database management system for CSE 412: Database Management at Arizona State Univerity. 
-
-![landing page](/images/firstpage.png)
-
-
-![landing page](/images/tab1.png)
-![landing page](/images/tab2.png)
-![landing page](/images/tab3.png)
-
-### Timeline
-The project was completed during the Fall 2021 semester in three phases:  
-- Phase I - Selecting a topic, researching development tools, and creating the project plan. By the end of this phase, our team designed the database system using an ER diagram to visualize how the database components interact.     
-- Phase II - data collection, ER diagram modification, and creating the database. During this phase, the team updated the original database design as we collected data and reconsidered the relationships of entities. By the end of this phase, we used SQL DDL to convert the ER Diagram to a relational database with tables and relationships and inserted the data to the database.  
-- Phase III included setting up our team development environment and creating the application which can make queries to the database. 
 
 ### Tools
 The following tools were used for the development of this project:
@@ -47,6 +32,12 @@ The following tools were used for the development of this project:
 - Heroku PostgresSQL Database
 - SQL
 
+### Timeline
+The project was completed during the Fall 2021 semester in three phases:  
+- Phase I - Selecting a topic, researching development tools, and creating the project plan. By the end of this phase, our team designed the database system using an ER diagram to visualize how the database components interact.     
+- Phase II - data collection, ER diagram modification, and creating the database. During this phase, the team updated the original database design as we collected data and reconsidered the relationships of entities. By the end of this phase, we used SQL DDL to convert the ER Diagram to a relational database with tables and relationships and inserted the data to the database.  
+- Phase III included setting up our team development environment and creating the application which can make queries to the database. 
+
 ### User Manual
 flytes is supported on all popular browsers, including Chrome, Firefox, Edge, and Internet Explorer 9 and above. Users can access the site via a preferred browser at www.flytes.com. Just kidding, users can access it at [cse-412.herokuapp.com](https://cse-412.herokuapp.com/).
 
@@ -55,6 +46,10 @@ flytes is a single-page application with 2 main components. The outer tabs on th
 View All Tabs:
 ![landing page](/images/firstpage.png)
 
+
+![landing page](/images/tab1.png)
+![landing page](/images/tab2.png)
+![landing page](/images/tab3.png)
 
 ### Database Schema
 #### ER Diagram
