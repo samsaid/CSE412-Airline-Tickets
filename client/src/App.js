@@ -1,10 +1,10 @@
 import React from 'react'
-import logo from './logo.svg';
 import Paper from "@material-ui/core/Paper";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import './App.css';
 import 'react-tabs/style/react-tabs.css';
 import dateFormat from "dateformat";
+import Image from "./logo.png"
 
 
 const formReducer = (state, event) => {
@@ -332,10 +332,11 @@ const searchCustomerSchedule = event => {
   return (
 
     <div className="App">
-      
+     
       <div style={{ height: 800, fontSize: 20, backgroundColor: 'white' }}>
 
         <div className="container">
+
           {/*Purchase Ticket Modal*/}
           <div id="id01" className="modal" style={{display:'none'}}>
             <span onClick={closeModal} className="close" title="Close Modal">&times;</span>
@@ -370,8 +371,11 @@ const searchCustomerSchedule = event => {
             </form>
           </div>
 
+        <div class="header">
+        <img src={Image} alt="app logo"/>
         <h2>Flight Bookings - Group 25</h2>
         <h5>Anjali Singh, Christine Pascua, Kaitlyn Allen, Samira Said</h5>
+        </div>
       <Paper square>
         <Tabs>
           <TabList>

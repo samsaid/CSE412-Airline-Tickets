@@ -2,10 +2,18 @@
   text-align: center;
 }
 
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+img{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  max-width: 25%;
+  max-height: 25%;
+ 
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -48,10 +56,6 @@
 
 .parallax, .bg2 {
   /* The image used */
-  
-  
-
-
   /* Create the parallax scrolling effect */
   background-attachment: fixed;
   background-position: center;
