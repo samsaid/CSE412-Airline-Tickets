@@ -120,16 +120,16 @@ CREATE TABLE Schedule(
 ```
 ### Database Server
 Screenshot of the database metrics on Heroku:
-![database image 1](/images/db.png)
+![database image 1](/images/db.png)  
 
-Database metrics via Terminal:
+Database metrics via Terminal:  
 ![database image 2](/images/db2.png)
 
 ## Getting Started
 ### User Manual
-flyts is supported on all popular browsers, including Chrome, Firefox, Edge, and Internet Explorer 9 and above. Users can access the site via a preferred browser at the link [cse-412.herokuapp.com](https://cse-412.herokuapp.com/).
+"flyts" is supported on all popular browsers, including Chrome, Firefox, Edge, and Internet Explorer 9 and above. Users can access the site via a preferred browser at the link [cse-412.herokuapp.com](https://cse-412.herokuapp.com/).
 
-flyts is a single-page application with 2 main components. The outer component is navigable by the tabs on the top row: "View All Tables", "Search Flights", "Search Tickets", "Search Customers", and "Search Airports" which updates the contents of the inner container. Upon opening the site link, users begin at the "View all Tabs" which contains 5 tabs, each displaying the full contents of their designated tables using the SQL command on the backend. 
+"flyts" is a single-page application with 2 main components. The outer component is navigable by the tabs on the top row: "View All Tables", "Search Flights", "Search Tickets", "Search Customers", and "Search Airports" which updates the contents of the inner container. Upon opening the site link, users begin at the "View all Tabs" which contains 5 tabs, each displaying the full contents of their designated tables using the SQL command on the backend. 
 
 #### View all Tables
 **Tab:** View All Tabs -> Flights, Airport, Customers, Schedule, Tickets  
@@ -225,5 +225,5 @@ heroku open
 Changes on deployed Heroku application should now be displayed.
 
 ### Video Demo
-Video Demo of application and database by Kaitlyn can be accessed [here](https://cse-412.herokuapp.com/)
+Video demonstration of the application and database by Kaitlyn can be accessed [here](https://cse-412.herokuapp.com/).
 
