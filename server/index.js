@@ -21,6 +21,7 @@ app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
 
+//get all Airport data
 app.get('/getAirports', (req, res) => {
   let dataResults;
   pool.query(`SELECT * FROM Airport;`, (err, response) => {
@@ -30,13 +31,13 @@ app.get('/getAirports', (req, res) => {
       }
       else{
         dataResults = response.rows;
-        //console.log(dataResults);
         res.json(dataResults);
           
       }
     });
 });
 
+//get all Flight data
 app.get('/getFlights', (req, res) => {
   let dataResults;
   pool.query(`SELECT * FROM Flight;`, (err, response) => {
@@ -46,12 +47,13 @@ app.get('/getFlights', (req, res) => {
       }
       else{
         dataResults = response.rows;
-        //console.log(dataResults);
         res.json(dataResults);
       }
     });
 });
 
+
+//get all Tickets data
 app.get('/getTickets', (req, res) => {
   let dataResults;
   pool.query(`SELECT * FROM Tickets;`, (err, response) => {
@@ -61,13 +63,13 @@ app.get('/getTickets', (req, res) => {
       }
       else{
         dataResults = response.rows;
-        //console.log(dataResults);
         res.json(dataResults);
           
       }
     });
 });
 
+//get all Customers data
 app.get('/getCustomers', (req, res) => {
   let dataResults;
   pool.query(`SELECT * FROM Customers;`, (err, response) => {
@@ -77,13 +79,13 @@ app.get('/getCustomers', (req, res) => {
       }
       else{
         dataResults = response.rows;
-        //console.log(dataResults);
         res.json(dataResults);
           
       }
     });
 });
 
+//get all Schedule data
 app.get('/getSchedule', (req, res) => {
   let dataResults;
   pool.query(`SELECT * FROM Schedule;`, (err, response) => {
@@ -93,13 +95,14 @@ app.get('/getSchedule', (req, res) => {
       }
       else{
         dataResults = response.rows;
-        //console.log(dataResults);
         res.json(dataResults);
           
       }
     });
 });
 
+
+//get People information
 app.get('/getPeopleHeadedTo', (req, res) => {
   let dataResults;
   pool.query(`SELECT * FROM Schedule;`, (err, response) => {
@@ -109,13 +112,13 @@ app.get('/getPeopleHeadedTo', (req, res) => {
       }
       else{
         dataResults = response.rows;
-        //console.log(dataResults);
         res.json(dataResults);
           
       }
     });
 });
 
+//search Tickets
 app.get('/searchTickets', (req, res) => {
   let dataResults;
   pool.query(`SELECT ticket_id FROM Tickets`, (err, response) => {
@@ -132,7 +135,9 @@ app.get('/searchTickets', (req, res) => {
     });
 });
 
-//SEARCH METHODS
+/*******************
+ * SEARCH METHODS
+ * *****************/
 app.get('/searchFlights', (req, res) => {
   const fromDate = req.query.fromDate;
   const depAirport = req.query.depAirport;
@@ -175,9 +180,8 @@ app.get('/searchFlights', (req, res) => {
     
 });
 
-//SEARCH METHODS
+
 app.get('/searchTicketsToAirport', (req, res) => {
-  //const toDate = req.query.toDate;
   const depAirport = req.query.depAirport;
 
 
@@ -199,6 +203,7 @@ app.get('/searchTicketsToAirport', (req, res) => {
     
 });
 
+//calculate seats left on a flight
 app.get('/seatsLeft', (req, res) => {
   const flight_number = req.query.flight_number;
 
@@ -221,7 +226,6 @@ app.get('/seatsLeft', (req, res) => {
 });
 
 app.get('/searchStateAirport', (req, res) => {
-  //const toDate = req.query.toDate;
   const state = req.query.state;
 
   let dataResults;
@@ -241,8 +245,9 @@ app.get('/searchStateAirport', (req, res) => {
     });
     
 });
+
+
 app.get('/searchCustomerSchedule', (req, res) => {
-  //const toDate = req.query.toDate;
   const first_name = req.query.first_name;
   const last_name = req.query.last_name;
 
@@ -302,9 +307,6 @@ app.get('/purchaseTickets', (req,res) => {
       }
       else{
         console.log("INSERT CUSTOMER");
-        //dataResults = response;
-        //console.log(dataResults);
-        //res.json(dataResults);
           
       }
     });
@@ -324,9 +326,6 @@ function callInsertSchedule(flight_number, first_name, last_name, dob){
       }
       else{
         console.log("INSERT SCHEDULE");
-        //dataResults = response;
-        //console.log(dataResults);
-        //res.json(dataResults);
           
       }
     });

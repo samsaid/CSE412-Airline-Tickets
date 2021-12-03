@@ -72,42 +72,7 @@ function App() {
       .then((schedule) => setSchedule(schedule))
       .then(console.log(schedule));
   }, []);
-/*
-  const [airportcode, setAirportCode] = React.useState([]);
-  const searchTicketsGoingTo = event => {
-    event.preventDefault();
-    setSubmitting(true);
 
-    setTimeout(() => {
-      setSubmitting(false);
-    }, 3000)
-  }
-*/
-  /*React.useEffect(() => {
-    fetch('/getTicketsToAirport', input)
-      .then((res) => res.json())
-      .then((airportcode) => setSchedule(airportcode))
-      .then(console.log(airportcode));
-  }, []);
-*/
-//TICKETS
-//const [searchTicketsResults, setSearchTicketsResults] = React.useState([]);
-/*
-const searchTicketsToAirport = event => {
-  event.preventDefault();
-  setSubmitting(true);
-
-  setTimeout(() => {
-    setSubmitting(false);
-  }, 3000)
-  
-  fetch('/searchTicketsToAirport')
-      .then((res) => res.json())
-      .then((searchTicketsResults) => setSearchTicketsResults(searchTicketsResults))
-      .then(console.log(searchTicketsResults));
-
-}
-*/
 //TICKETS GOING TO
 const [searchStateAirportResults, setSearchStateAirportResults] = React.useState([]);
 
@@ -124,7 +89,6 @@ const searchStateAirport = event => {
       .then((searchStateAirportResults) => setSearchStateAirportResults(searchStateAirportResults))
       .then(console.log(searchStateAirportResults));
 
-      //resetInputFields();
 }
 
 //TICKETS GOING TO
@@ -143,7 +107,6 @@ const searchStateAirport = event => {
         .then((searchTicketsGoingToResults) => setSearchTicketsGoingToResults(searchTicketsGoingToResults))
         .then(console.log(searchTicketsGoingToResults));
     
-        //resetInputFields();
   }
 
 //SEARCH CUSTOMERS SCHEDULE
@@ -162,7 +125,6 @@ const searchCustomerSchedule = event => {
       .then((searchCustomerResults) => setSearchCustomerResults(searchCustomerResults))
       .then(console.log(searchCustomerResults));
 
-  //resetInputFields();
 }
 
 
@@ -182,7 +144,6 @@ const searchCustomerSchedule = event => {
         .then((searchFlightResults) => setSearchFlightResults(searchFlightResults))
         .then(console.log(searchFlightResults));
 
-    //resetInputFields();
   }
 
   const handleChange = event => {
@@ -225,7 +186,6 @@ const searchCustomerSchedule = event => {
       .then((submitPurchaseResults) => setSubmitPurchaseResults(submitPurchaseResults))
       .then(console.log(submitPurchaseResults));
 
-      //resetInputFields();
 
   }
 
