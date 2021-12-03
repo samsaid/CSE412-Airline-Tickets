@@ -8,26 +8,26 @@
 - [2. Database Details](#database-schema)
     - [2.1. Schema](#schema)
     - [2.2. ER-to-Relational](#er-to-relational)
-        - [2.2.1.](#flights-table)
-        - [2.2.1.](#airport-table)
-        - [2.2.1.](#customers-table)
-        - [2.2.1.](#tickets-table)
-        - [2.2.1.](#schedule-table)
+        - [2.2.1. Flights Table](#flights-table)
+        - [2.2.2. Airports Table](#airport-table)
+        - [2.2.3. Customers Table](#customers-table)
+        - [2.2.4. Tickets Table](#tickets-table)
+        - [2.2.5. Schedule Table](#schedule-table)
     - [2.3. Database server on Heroku](#database-server)
 - [3. Getting Started](#getting-started)
-    - [2.1. User Manual](#user-manual)
-        - [View All Tables](#view-all-tabs)
-        - [Search Flights](#search-flights)
-        - [Purchase a Ticket](#purchase-a-ticket)
-        - [Search Tickets](#search-tickets)
-        - [Search Customers](#search-customers)
-        - [Search Airports](#search-airports)
-    - [2.2. Project Timeline](#project-timeline)
-    - [2.3. Known bugs](#known-bugs)
-    - [2.4. Development Environment](#development-environment)  
-        - [2.4.1. Push Changes to Github](#push-changes-to-github)
-        - [2.4.2. Push Changes to Heroku Application](#push-changes-to-heroku-application)
-    - [2.5. Video Demo](#video-demo)
+    - [3.1. User Manual](#user-manual)
+        - [3.1.1. View All Tables](#view-all-tabs)
+        - [3.1.2. Search Flights](#search-flights)
+        - [3.1.3. Purchase a Ticket](#purchase-a-ticket)
+        - [3.1.4. Search Tickets](#search-tickets)
+        - [3.1.5. Search Customers](#search-customers)
+        - [3.1.6. Search Airports](#search-airports)
+    - [3.2. Project Timeline](#project-timeline)
+    - [3.3. Known bugs](#known-bugs)
+    - [3.4. Development Environment](#development-environment)  
+        - [3.4.1. Push Changes to Github](#push-changes-to-github)
+        - [3.4.2. Push Changes to Heroku Application](#push-changes-to-heroku-application)
+    - [4.5. Video Demo](#video-demo)
  
 ## About the Project
 "flyts" is a mock online flight booking search service inspired by Google Flights, with emphasis on the database.  
@@ -127,39 +127,39 @@ Database metrics via Terminal:
 
 ## Getting Started
 ### User Manual
-flyts is supported on all popular browsers, including Chrome, Firefox, Edge, and Internet Explorer 9 and above. Users can access the site via a preferred browser at [www.cse-412.herokuapp.com](https://cse-412.herokuapp.com/).
+flyts is supported on all popular browsers, including Chrome, Firefox, Edge, and Internet Explorer 9 and above. Users can access the site via a preferred browser at the link [cse-412.herokuapp.com](https://cse-412.herokuapp.com/).
 
 flyts is a single-page application with 2 main components. The outer component is navigable by the tabs on the top row: "View All Tables", "Search Flights", "Search Tickets", "Search Customers", and "Search Airports" which updates the contents of the inner container. Upon opening the site link, users begin at the "View all Tabs" which contains 5 tabs, each displaying the full contents of their designated tables using the SQL command on the backend. 
 
 #### View all Tables
-**Tab: View All Tabs -> Flights, Airport, Customers, Schedule, Tickets**
+**Tab:** View All Tabs -> Flights, Airport, Customers, Schedule, Tickets  
 Users can view all data on the database.
-![landing page](/images/firstpage.png)
+![screenshot of landing page](/images/firstpage.png)
 
 #### Search Flights
-**Tab: Search Flights**
+**Tab:** Search Flights  
 Users can search for flights on a selected date.
-![landing page](/images/tab2.png)
+![screenshot of searching flights page](/images/tab2.png)
 
 #### Purchase a Ticket
-**Tab: Search Flights -> Purchase a Ticket**
+**Tab:** Search Flights -> Purchase a Ticket  
 Users can enter information to purchase a ticket on a flight if capacity allows.
-![landing page](/images/tab2-1.png)
+![screenshot of purchasing flights page](/images/tab2-1.png)
 
 #### Search Tickets
-**Tab: Search Tickets**
+**Tab:** Search Tickets  
 Users can search for tickets with based on a destination airport.
-![landing page](/images/tab3.png)
+![screenshot of search tickets page](/images/tab3.png)
 
 #### Search Customers
-**Tab: Search Customers**
-Uers can search custors names using names from the Customers table.
-![landing page](/images/tab3.png)
+**Tab:** Search Customers  
+Users can search custors names using names from the Customers table.
+![screenshot of search customer page](/images/tab3.png)
 
 #### Search Airports
-**Tab: Search Airports**
+**Tab:** Search Airports  
 Users can search for airports based on a selected state.
-![landing page](/images/tab5.png)
+![screenshot of search airports page](/images/tab5.png)
 
 ### Project Timeline
 The project was completed during the Fall 2021 semester in three phases:  
@@ -191,6 +191,7 @@ The last command will start the database server. Here you can begin to perform S
 ```
 \q
 cd /CSE412-Airline-Tickets
+npm install
 npm start
 ```
 **4.** In a seperate command line window, locate to client folder (this is the front end) and start the server
@@ -224,5 +225,5 @@ heroku open
 Changes on deployed Heroku application should now be displayed.
 
 ### Video Demo
-Video Demo of application and database by Kaitlyn Allen
+Video Demo of application and database by Kaitlyn can be accessed [here](https://cse-412.herokuapp.com/)
 
