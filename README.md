@@ -1,29 +1,35 @@
 # CSE412-Airline-Tickets
-<p align="center" ><img src="/images/logo.png" alt="logo" width="300"/> </p>
+<p align="center" ><img src="/images/logo.png" alt="logo" width="350"/> </p>
 
 ## Table of Contents  
 - [1. About the Project](#about-the-project)
-- [2. User Manual] (#user-manual)
     - [1.1. Tools](#tools)
-    - [1.2. Database Schema](#database-schema)
-        - [1.2.1. ER Diagram](#er-diagram)
-        - [1.2.2. ER-to-Relational](#er-to-relational)
-    - [1.3. System Architechture](#system-architechture)
-
+    - [1.2. System Architechture](#system-architechture)
+- [2. Database Details](#database-schema)
+    - [2.1. Schema](#schema)
+    - [2.2. ER-to-Relational](#er-to-relational)
+            - [2.2.1.](#flights-table)
+            - [2.2.1.](#airport-table)
+            - [2.2.1.](#customers-table)
+            - [2.2.1.](#tickets-table)
+            - [2.2.1.](#schedule-table)
+    - [2.3. Database server on Heroku](#database-server)
 - [3. Getting Started](#getting-started)
-    - [2.1 Using the Application](#using-the-application)
-    - [2.2. Development Environment](#development-environment)  
-        - [2.2.1. Push Changes to Github](#push-changes-to-github)
-        - [2.2.2. Push Changes to Heroku Application](#push-changes-to-heroku-application)
+    - [2.1. User Manual](#user-manual)
+    - [2.2. Project Timeline](#project-timeline)
+    - [2.3. Known bugs](#known-bugs)
+    - [2.4. Development Environment](#development-environment)  
+        - [2.4.1. Push Changes to Github](#push-changes-to-github)
+        - [2.4.2. Push Changes to Heroku Application](#push-changes-to-heroku-application)
+    - [2.5. Video Demo](#video-demo)
  
 ## About the Project
 flyts is a mock online flight booking search service inspired by Google Flights, with emphasis on the database.  
   
-  
-This repository contains the full stack web application and is connected to an external PostgresSQL database server. The purpose of this project is to demonstrate an understanding of a relational database management system for CSE 412: Database Management at Arizona State Univerity. 
+
+This repository contains the full stack web application which is connected to an external PostgresSQL database server. The purpose of this project is to demonstrate an understanding of a relational database management system through implementation for the course CSE 412: Database Management at Arizona State Univerity. 
 
 ### Tools
-The following tools were used for the development of this project:
 - Visual Studio Code
 - React
 - Node.js
@@ -32,28 +38,13 @@ The following tools were used for the development of this project:
 - Heroku PostgresSQL Database
 - SQL
 
-### Timeline
-The project was completed during the Fall 2021 semester in three phases:  
-- Phase I - Selecting a topic, researching development tools, and creating the project plan. By the end of this phase, our team designed the database system using an ER diagram to visualize how the database components interact.     
-- Phase II - data collection, ER diagram modification, and creating the database. During this phase, the team updated the original database design as we collected data and reconsidered the relationships of entities. By the end of this phase, we used SQL DDL to convert the ER Diagram to a relational database with tables and relationships and inserted the data to the database.  
-- Phase III included setting up our team development environment and creating the application which can make queries to the database. 
+### System Architechture
+Architechture Diagram 
+![System Overview](/images/arc.png)
 
-### User Manual
-flytes is supported on all popular browsers, including Chrome, Firefox, Edge, and Internet Explorer 9 and above. Users can access the site via a preferred browser at www.flytes.com. Just kidding, users can access it at [cse-412.herokuapp.com](https://cse-412.herokuapp.com/).
-
-flytes is a single-page application with 2 main components. The outer tabs on the first row "View All Tables", "Search Flights", "Search Tickets", "Search Customers", and "Search Airports" control the contents of the inner tab. Upon opening the site link, users begin at the "View all Tabs" which contains 5 tabs, each displaying the full contents of their designated tables using the command, ''' SELECT * FROM''' [insert table name] on the backend. 
-
-View All Tabs:
-![landing page](/images/firstpage.png)
-
-
-![landing page](/images/tab1.png)
-![landing page](/images/tab2.png)
-![landing page](/images/tab3.png)
-
-### Database Schema
-#### ER Diagram
-The database created for this project is a relational database model contining 5 entities. As the topic of this project is an online flight searching service, we designed the following entities which interact with each other: Flights, Airport, Customers, Tickets, Schedule.
+### Database Details
+#### Schema
+The database for this project is hosted externally on a Heroku server. The database is a relational database model contining 5 entities. As the topic of this project features an online flight searching service, we designed the following entities which interact with each other: Flights, Airport, Customers, Tickets, Schedule.
 
 ER (Entity-Relationship) Diagram:
 ![ER Diagram](/images/er-diagram.png)
@@ -61,7 +52,7 @@ ER (Entity-Relationship) Diagram:
 #### ER-to-Relational
 To create the database system in PostgresSQL, the ER Digram was transformed relational database model using the following SQL data definition language (DDL).  
 
-Flight table
+##### Flight table
 ```
 CREATE TABLE Flight (
     flight_number INT,
@@ -81,7 +72,7 @@ CREATE TABLE Flight (
     flight_capacity INT,
     PRIMARY KEY (customer_id));
 ```
-Airport table
+##### Airport table
 ```
 CREATE TABLE Airport (
     airport_code CHAR(3),
@@ -92,7 +83,7 @@ CREATE TABLE Airport (
     PRIMARY KEY (airport_code));
 ```
 
-Customer table
+##### Customers table
 ```
 CREATE TABLE Customers(
     customer_id INT,
@@ -101,7 +92,7 @@ CREATE TABLE Customers(
     dob DATE,
     PRIMARY KEY (customer_id));
 ```
-Tickets table
+##### Tickets table
 ```
 CREATE TABLE Tickets(
     ticket_id INT,
@@ -110,7 +101,7 @@ CREATE TABLE Tickets(
     PRIMARY KEY (flight_number, ticket_id),
     FOREIGN KEY (flight_number) REFERENCES Flight(flight_number) );
 ```
-Schedule table
+##### Schedule table
 ```
 CREATE TABLE Schedule(
     schedule_id INT,
@@ -122,14 +113,51 @@ CREATE TABLE Schedule(
     FOREIGN KEY (cust_id) REFERENCES Customers(customer_id));
 ```
 ### Database Server
+Screenshot of the database metrics on Heroku:
+![database image 1](/images/db.png)
+![database image 2](/images/db2.png)
 
+## Getting Started
+### User Manual
+flyts is supported on all popular browsers, including Chrome, Firefox, Edge, and Internet Explorer 9 and above. Users can access the site via a preferred browser at [www.cse-412.herokuapp.com](https://cse-412.herokuapp.com/).
 
-### System Architechture
-System Overview of Application
-![System Overview](/images/system-overview.png)
+flyts is a single-page application with 2 main components. The outer component is navigable by the tabs on the top row: "View All Tables", "Search Flights", "Search Tickets", "Search Customers", and "Search Airports" which updates the contents of the inner container. Upon opening the site link, users begin at the "View all Tabs" which contains 5 tabs, each displaying the full contents of their designated tables using the SQL command on the backend. 
 
-### Development Enviornment
-The following steps are only necessary for the project developers or users who are looking to implement a version of the project. To view/acces the live version of the appplication, see section on [using the application](#using-the-application).
+"View All Tabs" -> Flights, Airport, Customers, Schedule, Tickets
+Users can view all data on the database.
+![landing page](/images/firstpage.png)
+
+"Search Flights"
+Users can search for flights on a selected date.
+![landing page](/images/tab2.png)
+
+"Search Flights" -> Purchase a Ticket
+Users can enter information to purchase a ticket on a flight if capacity allows.
+![landing page](/images/tab2-1.png)
+
+"Search Tickets"
+Users can search for tickets with based on a destination airport.
+![landing page](/images/tab3.png)
+
+"Search Customers"
+Uers can search custors names using names from the Customers table.
+![landing page](/images/tab3.png)
+
+"Search Airports"
+Users can search for airports based on a selected state.
+![landing page](/images/tab5.png)
+
+### Project Timeline
+The project was completed during the Fall 2021 semester in three phases:  
+- Phase I - Selecting a topic, researching development tools, and creating the project plan. By the end of this phase, our team designed the database system using an ER diagram to visualize how the database components interact.     
+- Phase II - data collection, ER diagram modification, and creating the database. During this phase, the team updated the original database design as we collected data and reconsidered the relationships of entities. By the end of this phase, we converted the ER Diagram to a relational database with tables and inserted the data to the database.  
+- Phase III included setting up our team development environment and creating the application which can make queries to the database. 
+
+### Known Bugs
+- Customers table does not auto-update upon a customer purchasing a ticket from the front end of the application. We speculate this issue to be cause by the set up our fetch API which we did not have time to furthur debug within the scope of this project.
+
+### Development Enviornment:
+The following steps are only necessary for the project developers or users who are looking to implement a version of the project. To view/acces the live version of the appplication, see section on [using the application](#user-manual).
 
 **1.** Clone the project repository 
 ```
@@ -139,7 +167,7 @@ git clone https://github.com/samsaid/CSE412-Airline-Tickets.git
 ```
 cd CSE412-Airline-Tickets
 heroku login
-heroku pg : psql
+heroku psql
 ```
 The last command will start the database server. Here you can begin to perform SQL queries such as adding tables, deleting rows, etc.
 
@@ -179,4 +207,8 @@ git checkout masterbranch
 git push heroku main
 heroku open
 ```  
-Web page changes on "https://cse-412.herokuapp.com/" should now be displayed.
+Changes on deployed application "https://cse-412.herokuapp.com/" should now be displayed.
+
+### Video Demo
+Video Demo of application and database by Kaitlyn Allen
+
