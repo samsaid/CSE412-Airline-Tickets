@@ -8,14 +8,20 @@
 - [2. Database Details](#database-schema)
     - [2.1. Schema](#schema)
     - [2.2. ER-to-Relational](#er-to-relational)
-            - [2.2.1.](#flights-table)
-            - [2.2.1.](#airport-table)
-            - [2.2.1.](#customers-table)
-            - [2.2.1.](#tickets-table)
-            - [2.2.1.](#schedule-table)
+        - [2.2.1.](#flights-table)
+        - [2.2.1.](#airport-table)
+        - [2.2.1.](#customers-table)
+        - [2.2.1.](#tickets-table)
+        - [2.2.1.](#schedule-table)
     - [2.3. Database server on Heroku](#database-server)
 - [3. Getting Started](#getting-started)
     - [2.1. User Manual](#user-manual)
+        - [View All Tables](#view-all-tabs)
+        - [Search Flights](#search-flights)
+        - [Purchase a Ticket](#purchase-a-ticket)
+        - [Search Tickets](#search-tickets)
+        - [Search Customers](#search-customers)
+        - [Search Airports](#search-airports)
     - [2.2. Project Timeline](#project-timeline)
     - [2.3. Known bugs](#known-bugs)
     - [2.4. Development Environment](#development-environment)  
@@ -24,7 +30,7 @@
     - [2.5. Video Demo](#video-demo)
  
 ## About the Project
-flyts is a mock online flight booking search service inspired by Google Flights, with emphasis on the database.  
+"flyts" is a mock online flight booking search service inspired by Google Flights, with emphasis on the database.  
   
 
 This repository contains the full stack web application which is connected to an external PostgresSQL database server. The purpose of this project is to demonstrate an understanding of a relational database management system through implementation for the course CSE 412: Database Management at Arizona State Univerity. 
@@ -115,6 +121,8 @@ CREATE TABLE Schedule(
 ### Database Server
 Screenshot of the database metrics on Heroku:
 ![database image 1](/images/db.png)
+
+Database metrics via Terminal:
 ![database image 2](/images/db2.png)
 
 ## Getting Started
@@ -123,27 +131,33 @@ flyts is supported on all popular browsers, including Chrome, Firefox, Edge, and
 
 flyts is a single-page application with 2 main components. The outer component is navigable by the tabs on the top row: "View All Tables", "Search Flights", "Search Tickets", "Search Customers", and "Search Airports" which updates the contents of the inner container. Upon opening the site link, users begin at the "View all Tabs" which contains 5 tabs, each displaying the full contents of their designated tables using the SQL command on the backend. 
 
-"View All Tabs" -> Flights, Airport, Customers, Schedule, Tickets
+#### View all Tables
+**Tab: View All Tabs -> Flights, Airport, Customers, Schedule, Tickets**
 Users can view all data on the database.
 ![landing page](/images/firstpage.png)
 
-"Search Flights"
+#### Search Flights
+**Tab: Search Flights**
 Users can search for flights on a selected date.
 ![landing page](/images/tab2.png)
 
-"Search Flights" -> Purchase a Ticket
+#### Purchase a Ticket
+**Tab: Search Flights -> Purchase a Ticket**
 Users can enter information to purchase a ticket on a flight if capacity allows.
 ![landing page](/images/tab2-1.png)
 
-"Search Tickets"
+#### Search Tickets
+**Tab: Search Tickets**
 Users can search for tickets with based on a destination airport.
 ![landing page](/images/tab3.png)
 
-"Search Customers"
+#### Search Customers
+**Tab: Search Customers**
 Uers can search custors names using names from the Customers table.
 ![landing page](/images/tab3.png)
 
-"Search Airports"
+#### Search Airports
+**Tab: Search Airports**
 Users can search for airports based on a selected state.
 ![landing page](/images/tab5.png)
 
@@ -157,7 +171,7 @@ The project was completed during the Fall 2021 semester in three phases:
 - Customers table does not auto-update upon a customer purchasing a ticket from the front end of the application. We speculate this issue to be cause by the set up our fetch API which we did not have time to furthur debug within the scope of this project.
 
 ### Development Enviornment:
-The following steps are only necessary for the project developers or users who are looking to implement a version of the project. To view/acces the live version of the appplication, see section on [using the application](#user-manual).
+The following steps are only necessary for the project developers or users who are looking to implement a version of the project. To view/acces the live version of the appplication, see section on [user manual](#user-manual).
 
 **1.** Clone the project repository 
 ```
@@ -207,7 +221,7 @@ git checkout masterbranch
 git push heroku main
 heroku open
 ```  
-Changes on deployed application "https://cse-412.herokuapp.com/" should now be displayed.
+Changes on deployed Heroku application should now be displayed.
 
 ### Video Demo
 Video Demo of application and database by Kaitlyn Allen
