@@ -309,6 +309,7 @@ app.get('/purchaseTickets', (req,res) => {
       }
     });
 
+    callInsertSchedule(flight_price, first_name, last_name, dob);
     //not inserting anything into tickets because I have all of the tickets avaliable
     /*pool.query(`INSERT INTO Tickets (ticket_id, flight_number, price_usd) VALUES ((SELECT MAX(ticket_id)+1 FROM Tickets), $1, $2);`,[flight_number, flight_price],
    (err, response) => {
@@ -325,23 +326,6 @@ app.get('/purchaseTickets', (req,res) => {
           
       }
     });*/
-
-
-    pool.query(`INSERT INTO Schedule (schedule_id, ticket_id, flight_number, cust_id) VALUES ((SELECT MAX(schedule_id)+1 FROM Schedule),(SELECT MIN(Tickets.ticket_id) FROM Tickets LEFT JOIN Schedule ON Tickets.ticket_id=Schedule.ticket_id WHERE Tickets.flight_number=$1 and schedule_id is null), $1, (SELECT customer_id FROM Customers WHERE first_name=$2 AND last_name=$3 AND dob=$4)) ON CONFLICT (ticket_id) DO NOTHING;`,[flight_number, first_name, last_name, dob],
-   (err, response) => {
-      if (err) {
-          console.log("Error - Failed to complete query - INSERT SCHEDULE");
-          console.log(err);
-          return;
-      }
-      else{
-        console.log("INSERT SCHEDULE");
-        //dataResults = response;
-        //console.log(dataResults);
-        //res.json(dataResults);
-          
-      }
-    });
 
     /*pool.getConnection(function (err, conn){
       if(err) return callback(err);
@@ -402,6 +386,25 @@ app.get('/purchaseTickets', (req,res) => {
 
 
 });
+
+
+function callInsertSchedule(flight_number, first_name, last_name, dob){
+  pool.query(`INSERT INTO Schedule (schedule_id, ticket_id, flight_number, cust_id) VALUES ((SELECT MAX(schedule_id)+1 FROM Schedule),(SELECT MIN(Tickets.ticket_id) FROM Tickets LEFT JOIN Schedule ON Tickets.ticket_id=Schedule.ticket_id WHERE Tickets.flight_number=$1 and schedule_id is null), $1, (SELECT customer_id FROM Customers WHERE first_name=$2 AND last_name=$3 AND dob=$4)) ON CONFLICT (ticket_id) DO NOTHING;`,[flight_number, first_name, last_name, dob],
+   (err, response) => {
+      if (err) {
+          console.log("Error - Failed to complete query - INSERT SCHEDULE");
+          console.log(err);
+          return;
+      }
+      else{
+        console.log("INSERT SCHEDULE");
+        //dataResults = response;
+        //console.log(dataResults);
+        //res.json(dataResults);
+          
+      }
+    });
+}
 
 
 // All other GET requests not handled before will return our React app
