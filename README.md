@@ -225,5 +225,5 @@ heroku open
 Changes on deployed Heroku application should now be displayed.
 
 ### Video Demo
-Video demonstration of the application and database by Kaitlyn can be accessed [here](https://cse-412.herokuapp.com/).
+Video demonstration of the application and database by Kaitlyn can be accessed [here](https://www.youtube.com/watch?v=YK78F5kSmdk).
 
