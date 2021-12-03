@@ -8,8 +8,8 @@
 - [2. Database Details](#database-schema)
     - [2.1. Schema](#schema)
     - [2.2. ER-to-Relational](#er-to-relational)
-        - [2.2.1. Flights Table](#flights-table)
-        - [2.2.2. Airports Table](#airport-table)
+        - [2.2.1. Flight Table](#flights-table)
+        - [2.2.2. Airport Table](#airport-table)
         - [2.2.3. Customers Table](#customers-table)
         - [2.2.4. Tickets Table](#tickets-table)
         - [2.2.5. Schedule Table](#schedule-table)
@@ -133,7 +133,7 @@ Database metrics via Terminal:
 
 #### View all Tables
 **Tab:** View All Tabs -> Flights, Airport, Customers, Schedule, Tickets  
-Users can view all data on the database.
+Users can view all data retrieved from the database.
 ![screenshot of landing page](/images/firstpage.png)
 
 #### Search Flights
